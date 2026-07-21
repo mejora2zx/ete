@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reporte ETE – Zubex</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif;}
+body{background:#f0f2ff;min-height:100vh;}
+.topbar{background:#0D18A8;padding:14px 16px;position:sticky;top:0;z-index:100;}
+.topbar-row{display:flex;align-items:center;gap:10px;}
+.logo{background:rgba(255,255,255,0.15);border-radius:8px;width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;}
+.topbar h1{color:#fff;font-size:16px;font-weight:600;}
+.topbar p{color:rgba(255,255,255,0.7);font-size:11px;}
+.turno-badge{margin-left:auto;background:rgba(255,255,255,0.15);border-radius:20px;
+  padding:4px 12px;color:#fff;font-size:12px;font-weight:500;}
+.ctx-bar{background:#0a1385;padding:8px 16px;display:flex;gap:16px;flex-wrap:wrap;}
+.ctx-item{color:rgba(255,255,255,0.8);font-size:11px;}
+.ctx-item b{color:#fff;font-size:12px;}
+.kpi-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#c5c9f7;border-bottom:1px solid #c5c9f7;}
+.kpi{background:#fff;padding:10px 12px;text-align:center;}
+.kpi .kv{font-size:18px;font-weight:700;color:#0D18A8;}
+.kpi .kl{font-size:10px;color:#888;margin-top:1px;}
+.main{max-width:640px;margin:0 auto;padding:16px 16px 100px;}
+.card{background:#fff;border-radius:12px;border:1px solid #e0e3f8;padding:16px;margin-bottom:14px;}
+.card-title{font-size:14px;font-weight:600;color:#0D18A8;margin-bottom:12px;}
+.btn-primary{background:#0D18A8;color:#fff;border:none;border-radius:8px;
+  padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
+.btn-primary:hover{background:#0a1385;}
+.btn-primary:disabled{background:#aaa;cursor:not-allowed;}
+.btn-secondary{background:#fff;color:#0D18A8;border:1.5px solid #0D18A8;border-radius:8px;
+  padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
+.btn-secondary:hover{background:#e8eafc;}
+.btn-danger{background:#fff;color:#c00;border:1.5px solid #fcc;border-radius:8px;
+  padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
+.field{margin-bottom:12px;}
+label{font-size:12px;color:#555;font-weight:500;display:block;margin-bottom:4px;}
+input,select,textarea{width:100%;padding:8px 11px;font-size:14px;
+  border:1.5px solid #c5c9f7;border-radius:8px;background:#fff;color:#111;outline:none;}
+input:focus,select:focus,textarea:focus{border-color:#0D18A8;}
+textarea{resize:vertical;height:64px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.nombre-chip{margin-top:4px;padding:6px 10px;background:#e8eafc;border-radius:6px;
+  border:1px solid #c5c9f7;font-size:12px;color:#0D18A8;font-weight:500;}
+.nombre-err{margin-top:4px;padding:6px 10px;background:#fff0f0;border-radius:6px;
+  border:1px solid #fcc;font-size:12px;color:#c00;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;
+  display:flex;align-items:flex-end;justify-content:center;}
+.modal{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:640px;
+  padding:20px 16px 32px;max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:700;color:#0D18A8;margin-bottom:16px;
+  display:flex;justify-content:space-between;align-items:center;}
+.btn-close{background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1;}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.cat-chip{padding:10px 12px;border-radius:10px;border:2px solid transparent;
+  cursor:pointer;font-size:13px;font-weight:500;text-align:center;transition:all .15s;}
+.concepto-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;max-height:220px;overflow-y:auto;}
+.concepto-item{padding:9px 12px;border-radius:8px;border:1.5px solid #e0e3f8;
+  cursor:pointer;font-size:13px;color:#333;}
+.concepto-item:hover{border-color:#0D18A8;background:#f0f2ff;}
+.concepto-item.sel{border-color:#0D18A8;background:#e8eafc;color:#0D18A8;font-weight:500;}
+.evento{display:flex;align-items:center;gap:10px;padding:10px 12px;
+  border-radius:8px;border:1px solid #e0e3f8;margin-bottom:6px;background:#fafbff;}
+.evento-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.evento-info{flex:1;}
+.evento-nombre{font-size:13px;font-weight:500;color:#222;}
+.evento-cat{font-size:11px;color:#888;}
+.evento-min{font-size:14px;font-weight:700;color:#0D18A8;white-space:nowrap;}
+.evento-del{background:none;border:none;color:#ccc;cursor:pointer;font-size:18px;padding:0 4px;}
+.evento-del:hover{color:#c00;}
+.empty-state{text-align:center;padding:24px 16px;color:#aaa;font-size:13px;}
+.cat-resumen{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 12px;border-radius:8px;margin-bottom:5px;}
+.bottom-cta{position:fixed;bottom:0;left:0;right:0;background:#fff;
+  border-top:1px solid #e0e3f8;padding:12px 16px;z-index:99;}
+.bottom-cta-inner{max-width:640px;margin:0 auto;display:flex;gap:8px;}
+.screen{display:none;}
+.screen.active{display:block;}
+.success-wrap{text-align:center;padding:2rem 1rem;}
+.success-icon{width:64px;height:64px;border-radius:50%;background:#0D18A8;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;color:#fff;}
+.alert-box{padding:12px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;}
+.alert-error{background:#fff0f0;border:1.5px solid #f99;color:#c00;}
+.alert-warning{background:#fff8e1;border:1.5px solid #ffc107;color:#856404;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-row">
+    <div class="logo">ETE</div>
+    <div><h1>Reporte de ETE</h1><p>Impresión · Zubex</p></div>
+    <div class="turno-badge" id="turnoBadge" style="display:none"></div>
+  </div>
+</div>
+<div class="ctx-bar" id="ctxBar" style="display:none"></div>
+<div class="kpi-bar" id="kpiBar" style="display:none">
+  <div class="kpi"><div class="kv" id="kpiTM">0</div><div class="kl">Min TM</div></div>
+  <div class="kpi"><div class="kv" id="kpiEventos">0</div><div class="kl">Eventos</div></div>
+  <div class="kpi"><div class="kv" id="kpiRend">—</div><div class="kl">Rendimiento</div></div>
+  <div class="kpi"><div class="kv" id="kpiETE">—</div><div class="kl">ETE</div></div>
+</div>
+
+<!-- INICIO -->
+<div class="screen active" id="screenInicio">
+  <div class="main">
+    <div style="text-align:center;padding:20px 0 16px;">
+      <div style="width:56px;height:56px;border-radius:50%;background:#e8eafc;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:26px;">📋</div>
+      <p style="font-size:16px;font-weight:600;color:#0D18A8;">Iniciar nuevo turno</p>
+      <p style="font-size:13px;color:#888;margin-top:4px;">Llena los datos del encabezado una sola vez</p>
+    </div>
+    <div class="card">
+      <div class="grid2">
+        <div class="field"><label>Fecha</label><input id="hFecha"/></div>
+        <div class="field"><label>Turno</label>
+          <select id="hTurno"><option value="">Selecciona…</option><option>Día</option><option>Tarde</option><option>Noche</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Máquina</label>
+        <select id="hMaquina"><option value="">Selecciona…</option><option>Imp.4</option><option>Imp.5</option><option>Imp.8</option><option>Imp.9</option><option>Imp.11</option></select>
+      </div>
+      <div class="field"><label># Nómina</label>
+        <input id="hNomina" type="number" placeholder="Ej. 2626"/>
+        <div id="hNombreChip"></div>
+      </div>
+      <div class="field"><label>Coordinador</label>
+        <select id="hCoord"><option value="">Selecciona…</option><option>Alejandro Andrade</option><option>Humberto Moreno</option><option>Eduardo González</option></select>
+      </div>
+      <div class="field"><label>Velocidad (Mts/Min)</label><input id="hVel" type="number" placeholder="60"/></div>
+    </div>
+    <button class="btn-primary" id="btnIniciarTurno">Iniciar turno →</button>
+  </div>
+</div>
+
+<!-- TURNO ACTIVO -->
+<div class="screen" id="screenTurno">
+  <div class="main">
+    <div class="card">
+      <div class="card-title">⚡ Registrar evento</div>
+      <div class="grid2">
+        <button class="btn-secondary" id="btnAbrirTM" style="padding:14px;font-size:13px;border-radius:10px;">⏱ Tiempo Muerto<br/><span style="font-size:11px;font-weight:400;color:#888">Operativo</span></button>
+        <button class="btn-secondary" id="btnAbrirCorr" style="padding:14px;font-size:13px;border-radius:10px;">🔧 Tiempo Muerto<br/><span style="font-size:11px;font-weight:400;color:#888">Correctivo</span></button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="justify-content:space-between;display:flex;">
+        <span>📋 Eventos del turno</span>
+        <span id="eventoCount" style="font-size:12px;color:#888;font-weight:400;"></span>
+      </div>
+      <div id="eventosList"></div>
+    </div>
+    <div class="card" id="cardResumenCat" style="display:none">
+      <div class="card-title">📊 Acumulado por categoría</div>
+      <div id="resumenCat"></div>
+    </div>
+  </div>
+  <div class="bottom-cta">
+    <div class="bottom-cta-inner">
+      <button class="btn-danger" id="btnAbrirCierre" style="flex:1">Cerrar turno</button>
+    </div>
+  </div>
+</div>
+
+<!-- CIERRE -->
+<div class="screen" id="screenCierre">
+  <div class="main">
+    <div class="card">
+      <div class="card-title">📦 Datos de producción</div>
+      <div class="grid2">
+        <div class="field"><label>Metros Reales</label><input id="cMtsR" type="number" placeholder="0"/></div>
+        <div class="field"><label>Merma (KG)</label><input id="cKg" type="number" placeholder="0"/></div>
+        <div class="field"><label>Peso ID Bobina</label><input id="cPesoID" type="number" placeholder="0"/></div>
+        <div class="field"><label>Metros por bobina</label><input id="cMtsBob" type="number" placeholder="0"/></div>
+      </div>
+      <div id="mermaCalcBox" style="display:none;margin-top:8px;padding:10px 12px;background:#e8eafc;border-radius:8px;border:1px solid #c5c9f7;font-size:13px;color:#0D18A8;">
+        📐 Merma calculada: <b id="mermaCalcVal">0</b> metros
+        <span style="color:#888;font-size:11px;margin-left:6px;">(merma kg × mts bobina) ÷ peso ID bobina</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 KPIs finales</div>
+      <div class="grid2" id="kpiFinal" style="gap:8px;"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📋 Resumen de eventos</div>
+      <div id="resumenFinal"></div>
+    </div>
+    <div class="card">
+      <div class="field"><label>Observaciones</label><textarea id="cObs"></textarea></div>
+    </div>
+    <div id="errorTM" class="alert-box alert-warning" style="display:none">
+      ⚠️ <b>El tiempo muerto total supera los 400 minutos planeados.</b><br/>
+      Por favor revisa los eventos registrados antes de guardar.<br/>
+      <span id="errorTMDetalle" style="font-size:12px;"></span>
+    </div>
+    <div id="errorGuardar" class="alert-box alert-error" style="display:none">
+      ❌ Error al conectar con Power Automate. Verifica tu conexión e intenta de nuevo.
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="btn-secondary" id="btnVolverTurno" style="flex:1">← Volver</button>
+      <button class="btn-primary" id="btnGuardar" style="flex:2">Guardar reporte</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="screen" id="screenSuccess">
+  <div class="main">
+    <div class="success-wrap">
+      <div class="success-icon">✓</div>
+      <p style="font-size:20px;font-weight:700;color:#0D18A8;margin-bottom:6px;">Turno cerrado</p>
+      <p style="font-size:14px;color:#555;margin-bottom:24px;">Reporte guardado en Excel correctamente</p>
+      <div class="card" id="successDetail" style="text-align:left;margin-bottom:20px;"></div>
+      <button class="btn-primary" id="btnNuevoTurno">Nuevo turno</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TM OPERATIVO -->
+<div class="modal-overlay" id="modalTM" style="display:none">
+  <div class="modal">
+    <div class="modal-title">⏱ Tiempo Muerto Operativo<button class="btn-close" id="btnCerrarTM">✕</button></div>
+    <p style="font-size:12px;color:#888;margin-bottom:12px;">1. Selecciona la categoría</p>
+    <div class="cat-grid" id="catGrid"></div>
+    <div id="conceptoSection" style="display:none">
+      <p style="font-size:12px;color:#888;margin-bottom:8px;">2. Selecciona el concepto</p>
+      <div class="concepto-list" id="conceptoList"></div>
+    </div>
+    <div id="minutosSection" style="display:none">
+      <div class="field"><label>3. Minutos</label><input id="tmMinutos" type="number" min="1" placeholder="Ej. 15"/></div>
+      <button class="btn-primary" id="btnGuardarTM">Registrar evento</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CORRECTIVO -->
+<div class="modal-overlay" id="modalCorr" style="display:none">
+  <div class="modal">
+    <div class="modal-title">🔧 Tiempo Muerto Correctivo<button class="btn-close" id="btnCerrarCorr">✕</button></div>
+    <div class="field"><label>Descripción de la falla</label><input id="corrFalla" placeholder="Describe la falla…"/></div>
+    <div class="field"><label># Orden de Trabajo</label><input id="corrOT" placeholder="Ej. 4521"/></div>
+    <div class="field"><label>Minutos</label><input id="corrMin" type="number" min="1" placeholder="Ej. 30"/></div>
+    <button class="btn-primary" id="btnGuardarCorr">Registrar falla</button>
+  </div>
+</div>
+
+<script>
+const PA_URL = "https://default7a3d29b2b6e142e8adceff1c622168.90.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/22/workflows/b522b25a61644b968c48d577cea91aa0/triggers/manual/paths/invoke?api-version=1";
+const MIN_PLANEADOS = 400;
+
+const PERSONAL={2060:"MARTINEZ PEREZ LUIS ANGEL",2281:"GONZALEZ GONZALEZ EDUARDO",2303:"SANCHEZ CORONADO ROBERTO ALEJANDRO",2316:"CRUZ HERNANDEZ JUAN ANGEL",2352:"NUÑEZ PACHECO JOSE EFRAIN",2459:"RODRIGUEZ ZAVALA JOSE ANTONIO",2492:"RODRIGUEZ PEREZ JAIR ALEJANDRO",2580:"BOCANEGRA MONCADA JOEL",2596:"SALINAS RAMIREZ MARIO HUMBERTO",2626:"ESQUIVEL SALAS MANUEL ALEJANDRO",2657:"TORRES GONZALEZ ABRAHAM",2676:"RODRIGUEZ GUZMAN JESUS",2677:"RODRIGUEZ GUZMAN DAVID",2695:"ROJAS JARAMILLO IGNACIO RAMON",2706:"GONZALEZ MUÑIZ JUAN ENRIQUE",2732:"PEREZ JIMENEZ CARLOS ALEJANDRO",2764:"ANDRADE ARIAS JESUS ALEJANDRO",2866:"ARMIJO SAAVEDRA SAMUEL",2879:"MALDONADO DURAN OZIEL EMMANUEL",2883:"MORALES CAMPOS DAVID",2886:"HERRERA VALERO JOSE JOAQUIN",2937:"HERNANDEZ CEDILLO ELIUD OSVALDO",2950:"JIMENEZ RIVERA JUAN ANTONIO",2958:"GARCIA OCHOA JUAN FRANCISCO",2964:"MORENO BADILLO JUAN HUMBERTO",2979:"OCHOA SOLIS RAYMUNDO",2980:"MARTINEZ OCHOA BRANDON GILBERTO",2981:"DOMINGUEZ ULLOA MARTIN JOVANI",2983:"OCHOA MARTINEZ MIGUEL ANGEL",3065:"SANCHEZ GONZALEZ BRANDON IMANOL",3069:"GONZALEZ BRANDON",3079:"BOCANEGRA LEIJA MICHELLE ALDAIR",3097:"SALAS SOTO CARLOS ALBERTO",3103:"GUZMAN RODRIGUEZ MIGUEL NICOLAS",3252:"PALOMO NOROÑA JAVIER",3292:"GARCIA GALVAN VICTOR",3296:"GOMEZ HERRERA JOSE ORLANDO",3307:"LOPEZ PEREZ BERSAIN",3328:"PEREZ JIMENEZ ROSEY DE JESUS",3351:"BRIONES MARTINEZ DAVID ALBERTO",3374:"SANCHEZ TIENDA JOSE FERNANDO",3376:"GARCIA CARREON FRANCISCO JAVIER",3422:"GONZALEZ SANCHEZ MARIO ALEXIS",3470:"NAFARRATE GOMEZ JOSE FRANCISCO",3472:"GOMEZ CARDONA JOSE DOMINGO",3477:"VILLEGAS MARTINEZ LUIS ALBERTO",3535:"DIAZ GUTIERREZ JOSIEL",3542:"GOMEZ TAPIA EDWIN ORLANDO",3553:"GONZALEZ LOPEZ CESAR HUMBERTO",3582:"GOMEZ TAPIA JOSE FRANCISCO",3612:"DELGADO LEIJA MARCO ANTONIO",3622:"SEPULVEDA FRAGA MARCOS NATANAEL",3626:"BERMEA LOPEZ EDUARDO",3631:"CARREON LARA ANGEL EDUARDO",3632:"RAMIREZ SANTOS KEVIN ALEJANDRO",3642:"RAMIREZ MUÑIZ GERARDO ALBERTO",3643:"AGUILAR CUEVAS ARMANDO",3655:"GONZALEZ ALVAREZ JUAN PABLO",3659:"ESTRADA CHACON JULIO DANIEL",3666:"HUERTA MORALES JUAN PABLO",3669:"LOPEZ PEREZ AURELIO",3670:"HERNANDEZ IZQUIERDO JORGE RAUL",3686:"SILGUERO VILLEGAS MILTON MISAEL"};
+
+const CATEGORIAS=[
+  {id:"cambio",label:"Cambio de Modelo",color:"#0D18A8",bg:"#e8eafc",
+    conceptos:["Cambio de mangas / rodillos porta cliche","Cambio de Anillox","Lavado de bombas","Cambio de tinta","Vestido de maquina","Cambio de navajas y sellos en rasqueta","Poner ficha o desarrollo de rodillos","Calibracion de unidades","Ajuste de presión","Ajuste de Registro","Tonos","Cambio de modelo","Pruebas de desprendimiento (funda)","Liberación 1era. Pieza"]},
+  {id:"ajuste",label:"Paro por Ajustes",color:"#1a27c4",bg:"#eef0ff",
+    conceptos:["Unidades descalibradas","Ajuste o falla en rasqueta","Catalización","Checar Viscosidad","Ajuste de Mamparas","Falla o cambio Anilox","Ajuste o Cambio Grabados","Ajuste o Cambio del reverso","Ajuste de cierre en grabado","Sticky back","Calzar placa","Ajuste de Montaje","Ajustar presiones por falla de maquina","Fallas en material parches, Olanes, Grumos, Arrugas","Esperar Grabado"]},
+  {id:"limpieza",label:"Limpieza en Máquina",color:"#2e3fd4",bg:"#f0f2ff",
+    conceptos:["Rasquetas","Anilox, mangas","Cliches","Destapar anilox","Destapar Mangueras","Tambor","Limpieza de bombas","Limpieza placas","Grabados"]},
+  {id:"faltantes",label:"Fallas por Faltantes",color:"#0a1385",bg:"#e8eafc",
+    conceptos:["Falta material nuevo","Material de ajuste","Preparar material","Falta de Tintas","Falta de Grabados","Falta de Programa"]},
+  {id:"operativo",label:"T.M. Operativo",color:"#061070",bg:"#e8eafc",
+    conceptos:["Junta Extraordinaria","Falta de personal","Entrega de turno","llenado de Reportes y tirar merma","Sacar estándares","Cambio de bobina","Espera de Grabados","Espera de montaje","Limpieza área"]},
+];
+
+let turno={}, eventos=[], selCat=null, selConcepto=null;
+
+function today(){const d=new Date();return String(d.getMonth()+1).padStart(2,"0")+"/"+String(d.getDate()).padStart(2,"0")+"/"+d.getFullYear();}
+function weekNum(){const d=new Date();return Math.ceil((((d-new Date(d.getFullYear(),0,1))/86400000)+1)/7);}
+function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");}
+function sumEventos(){return eventos.reduce((a,e)=>a+(parseInt(e.minutos)||0),0);}
+function getMermaMetros(){
+  const kg=parseFloat(document.getElementById("cKg").value)||0;
+  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
+  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
+  return (kg>0&&mtsBob>0&&pesoID>0)?(kg*mtsBob)/pesoID:0;
+}
+
+// INICIO
+document.getElementById("hFecha").value=today();
+document.getElementById("hNomina").addEventListener("input",function(){
+  const nom=parseInt(this.value)||0, nombre=PERSONAL[nom]||"";
+  const chip=document.getElementById("hNombreChip");
+  chip.innerHTML=nom?(nombre?`<div class="nombre-chip">✓ ${nombre}</div>`:`<div class="nombre-err">Nómina no encontrada</div>`):"";
+});
+
+document.getElementById("btnIniciarTurno").addEventListener("click",function(){
+  const fecha=document.getElementById("hFecha").value;
+  const t=document.getElementById("hTurno").value;
+  const maq=document.getElementById("hMaquina").value;
+  const nom=document.getElementById("hNomina").value;
+  const coord=document.getElementById("hCoord").value;
+  const vel=document.getElementById("hVel").value;
+  if(!fecha||!t||!maq||!nom||!coord||!vel){alert("Completa todos los campos para iniciar el turno.");return;}
+  const nombre=PERSONAL[parseInt(nom)]||nom;
+  turno={fecha,turno:t,maquina:maq,nomina:nom,operador:nombre,coordinador:coord,velocidad:parseFloat(vel),semana:weekNum()};
+  eventos=[];
+  setupTurnoUI();
+  showScreen("screenTurno");
+});
+
+function setupTurnoUI(){
+  document.getElementById("turnoBadge").textContent=turno.turno+" · "+turno.maquina;
+  document.getElementById("turnoBadge").style.display="block";
+  document.getElementById("ctxBar").style.display="flex";
+  document.getElementById("ctxBar").innerHTML=
+    `<div class="ctx-item"><b>${turno.operador}</b></div>`+
+    `<div class="ctx-item">Nómina: <b>${turno.nomina}</b></div>`+
+    `<div class="ctx-item">Coord: <b>${turno.coordinador}</b></div>`+
+    `<div class="ctx-item">Vel: <b>${turno.velocidad} m/min</b></div>`;
+  document.getElementById("kpiBar").style.display="grid";
+  updateKPIs(); renderEventos();
+}
+
+function updateKPIs(){
+  const totTM=sumEventos();
+  document.getElementById("kpiTM").textContent=totTM;
+  document.getElementById("kpiEventos").textContent=eventos.length;
+  const mtsR=parseFloat(document.getElementById("cMtsR")?document.getElementById("cMtsR").value:0)||0;
+  if(mtsR>0){
+    const capTeo=turno.velocidad*MIN_PLANEADOS;
+    const mermaM=getMermaMetros();
+    const rend=((mtsR/capTeo)*100).toFixed(0);
+    const cal=mtsR>0?(((mtsR-mermaM)/mtsR)*100).toFixed(0):"—";
+    const ete=((MIN_PLANEADOS/480)*(mtsR/capTeo)*((mtsR-mermaM)/mtsR)*100).toFixed(1);
+    document.getElementById("kpiRend").textContent=rend+"%";
+    document.getElementById("kpiETE").textContent=ete+"%";
+  } else {
+    document.getElementById("kpiRend").textContent="—";
+    document.getElementById("kpiETE").textContent="—";
+  }
+}
+
+function renderEventos(){
+  const el=document.getElementById("eventosList");
+  document.getElementById("eventoCount").textContent=eventos.length+" evento"+(eventos.length!==1?"s":"");
+  if(eventos.length===0){
+    el.innerHTML=`<div class="empty-state">Sin eventos registrados.<br/>Usa los botones de arriba para registrar tiempos muertos.</div>`;
+    document.getElementById("cardResumenCat").style.display="none";
+    return;
+  }
+  el.innerHTML=eventos.map((e,i)=>{
+    const cat=CATEGORIAS.find(c=>c.id===e.catId)||{color:"#c00",label:"Correctivo"};
+    return `<div class="evento">
+      <div class="evento-dot" style="background:${cat.color}"></div>
+      <div class="evento-info">
+        <div class="evento-nombre">${e.concepto}</div>
+        <div class="evento-cat">${cat.label} · ${e.hora}</div>
+      </div>
+      <div class="evento-min">${e.minutos} min</div>
+      <button class="evento-del" data-i="${i}">×</button>
+    </div>`;
+  }).join("");
+  el.querySelectorAll(".evento-del").forEach(btn=>{
+    btn.addEventListener("click",function(){eventos.splice(parseInt(this.dataset.i),1);renderEventos();updateKPIs();});
+  });
+  renderResumenCat();
+}
+
+function renderResumenCat(){
+  const card=document.getElementById("cardResumenCat");
+  const el=document.getElementById("resumenCat");
+  const totales={};
+  eventos.forEach(e=>{totales[e.catId]=(totales[e.catId]||0)+(parseInt(e.minutos)||0);});
+  const cats=Object.keys(totales);
+  if(!cats.length){card.style.display="none";return;}
+  card.style.display="block";
+  el.innerHTML=cats.map(cid=>{
+    const cat=cid==="correctivo"?{label:"Correctivo",color:"#c00"}:(CATEGORIAS.find(c=>c.id===cid)||{label:cid,color:"#888"});
+    return `<div class="cat-resumen" style="background:${cat.color}"><span style="color:#fff">${cat.label}</span><b style="color:#fff">${totales[cid]} min</b></div>`;
+  }).join("")+`<div class="cat-resumen" style="background:#333"><span style="color:#fff">TOTAL TM</span><b style="color:#fff">${sumEventos()} min</b></div>`;
+}
+
+// MODAL TM
+document.getElementById("btnAbrirTM").addEventListener("click",()=>{
+  selCat=null;selConcepto=null;
+  document.getElementById("conceptoSection").style.display="none";
+  document.getElementById("minutosSection").style.display="none";
+  document.getElementById("tmMinutos").value="";
+  renderCatGrid();
+  document.getElementById("modalTM").style.display="flex";
+});
+document.getElementById("btnCerrarTM").addEventListener("click",()=>document.getElementById("modalTM").style.display="none");
+
+function renderCatGrid(){
+  const g=document.getElementById("catGrid");
+  g.innerHTML=CATEGORIAS.map(c=>`
+    <div class="cat-chip" data-id="${c.id}"
+      style="background:${selCat===c.id?c.bg:'#f8f9ff'};border-color:${selCat===c.id?c.color:'#e0e3f8'};color:${selCat===c.id?c.color:'#444'}">
+      ${c.label}</div>`).join("");
+  g.querySelectorAll(".cat-chip").forEach(el=>{
+    el.addEventListener("click",function(){
+      selCat=this.dataset.id;selConcepto=null;
+      renderCatGrid();renderConceptos();
+      document.getElementById("conceptoSection").style.display="block";
+      document.getElementById("minutosSection").style.display="none";
+    });
+  });
+}
+
+function renderConceptos(){
+  const cat=CATEGORIAS.find(c=>c.id===selCat);
+  const el=document.getElementById("conceptoList");
+  el.innerHTML=cat.conceptos.map(c=>`<div class="concepto-item ${selConcepto===c?'sel':''}" data-c="${c}">${c}</div>`).join("");
+  el.querySelectorAll(".concepto-item").forEach(el=>{
+    el.addEventListener("click",function(){
+      selConcepto=this.dataset.c;renderConceptos();
+      document.getElementById("minutosSection").style.display="block";
+      document.getElementById("tmMinutos").focus();
+    });
+  });
+}
+
+document.getElementById("btnGuardarTM").addEventListener("click",()=>{
+  const min=parseInt(document.getElementById("tmMinutos").value)||0;
+  if(!selCat||!selConcepto||min<=0){alert("Selecciona categoría, concepto y captura los minutos.");return;}
+  const ahora=new Date();
+  const hora=String(ahora.getHours()).padStart(2,"0")+":"+String(ahora.getMinutes()).padStart(2,"0");
+  eventos.push({tipo:"operativo",catId:selCat,concepto:selConcepto,minutos:min,hora});
+  document.getElementById("modalTM").style.display="none";
+  renderEventos();updateKPIs();
+});
+
+// MODAL CORRECTIVO
+document.getElementById("btnAbrirCorr").addEventListener("click",()=>{
+  document.getElementById("corrFalla").value="";
+  document.getElementById("corrOT").value="";
+  document.getElementById("corrMin").value="";
+  document.getElementById("modalCorr").style.display="flex";
+});
+document.getElementById("btnCerrarCorr").addEventListener("click",()=>document.getElementById("modalCorr").style.display="none");
+document.getElementById("btnGuardarCorr").addEventListener("click",()=>{
+  const falla=document.getElementById("corrFalla").value.trim();
+  const ot=document.getElementById("corrOT").value.trim();
+  const min=parseInt(document.getElementById("corrMin").value)||0;
+  if(!falla||min<=0){alert("Captura la descripción y los minutos.");return;}
+  const ahora=new Date();
+  const hora=String(ahora.getHours()).padStart(2,"0")+":"+String(ahora.getMinutes()).padStart(2,"0");
+  eventos.push({tipo:"correctivo",catId:"correctivo",concepto:falla,ot,minutos:min,hora});
+  document.getElementById("modalCorr").style.display="none";
+  renderEventos();updateKPIs();
+});
+
+// CIERRE
+document.getElementById("btnAbrirCierre").addEventListener("click",()=>{
+  renderResumenFinal();
+  showScreen("screenCierre");
+});
+document.getElementById("btnVolverTurno").addEventListener("click",()=>showScreen("screenTurno"));
+
+["cMtsR","cKg","cPesoID","cMtsBob"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) el.addEventListener("input",()=>{calcMerma();updateKPIs();renderKPIFinal();});
+});
+
+function calcMerma(){
+  const kg=parseFloat(document.getElementById("cKg").value)||0;
+  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
+  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
+  const box=document.getElementById("mermaCalcBox");
+  if(kg>0&&mtsBob>0&&pesoID>0){
+    document.getElementById("mermaCalcVal").textContent=((kg*mtsBob)/pesoID).toFixed(1);
+    box.style.display="block";
+  } else { box.style.display="none"; }
+}
+
+function renderKPIFinal(){
+  const mtsR=parseFloat(document.getElementById("cMtsR").value)||0;
+  const mermaM=getMermaMetros();
+  const capTeo=turno.velocidad*MIN_PLANEADOS;
+  const rend=capTeo>0?parseFloat(((mtsR/capTeo)*100).toFixed(2)):0;
+  const cal=mtsR>0?parseFloat((((mtsR-mermaM)/mtsR)*100).toFixed(2)):0;
+  const disp=parseFloat(((MIN_PLANEADOS/480)*100).toFixed(2));
+  const ete=parseFloat(((disp/100)*(rend/100)*(cal/100)*100).toFixed(2));
+  const totTM=sumEventos();
+  document.getElementById("kpiFinal").innerHTML=[
+    ["Cap. Teórica",capTeo.toLocaleString()+" mts"],["Metros Reales",mtsR.toLocaleString()+" mts"],
+    ["Rendimiento",rend+"%"],["Calidad",cal+"%"],
+    ["Disponibilidad",disp+"%"],["ETE",ete+"%"],
+    ["Total TM",totTM+" min"],["Min. Planeados",MIN_PLANEADOS+" min"],
+  ].map(([l,v])=>`<div style="background:#f4f5fd;border-radius:8px;padding:10px 12px;border:1px solid #c5c9f7;">
+    <div style="font-size:11px;color:#888;">${l}</div>
+    <div style="font-size:16px;font-weight:700;color:#0D18A8;">${v}</div>
+  </div>`).join("");
+}
+
+function renderResumenFinal(){
+  renderKPIFinal();
+  const el=document.getElementById("resumenFinal");
+  if(!eventos.length){el.innerHTML=`<div class="empty-state">Sin eventos registrados.</div>`;return;}
+  el.innerHTML=eventos.map(e=>{
+    const cat=e.catId==="correctivo"?{color:"#c00"}:(CATEGORIAS.find(c=>c.id===e.catId)||{color:"#888"});
+    return `<div style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;border:1px solid #e0e3f8;margin-bottom:5px;font-size:12px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:${cat.color};flex-shrink:0;"></div>
+      <span style="flex:1;color:#333;">${e.concepto}</span>
+      <span style="color:#888;">${e.hora}</span>
+      <span style="font-weight:700;color:#0D18A8;">${e.minutos} min</span>
+    </div>`;
+  }).join("");
+}
+
+// GUARDAR
+document.getElementById("btnGuardar").addEventListener("click",async function(){
+  document.getElementById("errorTM").style.display="none";
+  document.getElementById("errorGuardar").style.display="none";
+
+  // VALIDACIÓN: TM no puede superar minutos planeados
+  const totTM=sumEventos();
+  if(totTM>MIN_PLANEADOS){
+    document.getElementById("errorTMDetalle").textContent=
+      `Tiempo muerto registrado: ${totTM} min — Máximo permitido: ${MIN_PLANEADOS} min (excede por ${totTM-MIN_PLANEADOS} min)`;
+    document.getElementById("errorTM").style.display="block";
+    document.getElementById("errorTM").scrollIntoView({behavior:"smooth"});
+    return;
+  }
+
+  this.disabled=true; this.textContent="Guardando…";
+
+  const mtsR=parseFloat(document.getElementById("cMtsR").value)||0;
+  const mermaKg=parseFloat(document.getElementById("cKg").value)||0;
+  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
+  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
+  const mermaM=getMermaMetros();
+  const capTeo=turno.velocidad*MIN_PLANEADOS;
+  const rend=capTeo>0?parseFloat(((mtsR/capTeo)*100).toFixed(2)):0;
+  const cal=mtsR>0?parseFloat((((mtsR-mermaM)/mtsR)*100).toFixed(2)):0;
+  const disp=parseFloat(((MIN_PLANEADOS/480)*100).toFixed(2));
+  const ete=parseFloat(((disp/100)*(rend/100)*(cal/100)*100).toFixed(2));
+
+  const totPorCat={cambio:0,ajuste:0,limpieza:0,faltantes:0,operativo:0,correctivo:0};
+  eventos.forEach(e=>{if(totPorCat[e.catId]!==undefined)totPorCat[e.catId]+=(parseInt(e.minutos)||0);});
+  const totOp=totPorCat.cambio+totPorCat.ajuste+totPorCat.limpieza+totPorCat.faltantes+totPorCat.operativo;
+  const totCorr=totPorCat.correctivo;
+  const totDia=totOp+totCorr;
+
+  const minPorConcepto={};
+  eventos.filter(e=>e.tipo==="operativo").forEach(e=>{minPorConcepto[e.concepto]=(minPorConcepto[e.concepto]||0)+(parseInt(e.minutos)||0);});
+  const g=k=>minPorConcepto[k]||0;
+
+  const fechaParts=turno.fecha.split("/");
+  const fechaISO=`${fechaParts[2]}-${fechaParts[0].padStart(2,"0")}-${fechaParts[1].padStart(2,"0")}`;
+  const corrFallas=eventos.filter(e=>e.tipo==="correctivo");
+
+  const payload={
+    "Observaciones": document.getElementById("cObs").value||"",
+    "Quien Captruro": "App ETE",
+    "Semana": turno.semana,
+    "Fecha (mes/Dia(año)": fechaISO,
+    "Maquina": turno.maquina,
+    "# Empleado": parseInt(turno.nomina),
+    "Operador ": turno.operador,
+    "Coordinador": turno.coordinador,
+    "Turno": turno.turno,
+    "Velocidad": turno.velocidad,
+    "Minutos Disponibles": 480,
+    "Minutos Planeados": MIN_PLANEADOS,
+    "Cap.Teorica": capTeo,
+    "Diferencia de Producción": capTeo-mtsR,
+    "Producción en Tiempo muerto (Minutos)": turno.velocidad*totDia,
+    "Producción Real": mtsR,
+    "Merma proceso + Devoluciones (metros)": mermaM,
+    "Peso ID. Bobina": pesoID,
+    "Metros ID bobina": mtsBob,
+    "Merma en Mts": mermaM,
+    "Rendimiento Diario": rend,
+    "Cambio de mangas / rodillos porta cliche": g("Cambio de mangas / rodillos porta cliche"),
+    "Cambio de Anillox": g("Cambio de Anillox"),
+    "Lavado de bombas": g("Lavado de bombas"),
+    "Cambio de tinta ": g("Cambio de tinta"),
+    "Vestido de maquina": g("Vestido de maquina"),
+    "Cambio de navajas y sellos en rasqueta": g("Cambio de navajas y sellos en rasqueta"),
+    "Poner ficha o desarrollo de rodillos": g("Poner ficha o desarrollo de rodillos"),
+    "Calibracion de unidades": g("Calibracion de unidades"),
+    "Ajuste de presión": g("Ajuste de presión"),
+    "Ajuste de Registro": g("Ajuste de Registro"),
+    "Tonos": g("Tonos"),
+    "Cambio de modelo": g("Cambio de modelo"),
+    "Pruebas de desprendimiento (funda)": g("Pruebas de desprendimiento (funda)"),
+    "Liberación 1era. Pieza": g("Liberación 1era. Pieza"),
+    "Total TM Cambio Modelo": totPorCat.cambio,
+    "Unidades descalibradas": g("Unidades descalibradas"),
+    "Ajuste o falla en rasqueta": g("Ajuste o falla en rasqueta"),
+    "Catalización": g("Catalización"),
+    "Checar Viscosidad": g("Checar Viscosidad"),
+    "Ajuste de Mamparas": g("Ajuste de Mamparas"),
+    "Falla o cambio Anilox": g("Falla o cambio Anilox"),
+    "Ajuste o Cambio Grabados": g("Ajuste o Cambio Grabados"),
+    "Ajuste o Cambio del reverso": g("Ajuste o Cambio del reverso"),
+    "Ajuste de cierre en grabado": g("Ajuste de cierre en grabado"),
+    "Sticky back": g("Sticky back"),
+    "Calzar placa": g("Calzar placa"),
+    "Ajuste de Montaje": g("Ajuste de Montaje"),
+    "Ajustar presiones por falla de maquina": g("Ajustar presiones por falla de maquina"),
+    "Fallas en material parches, Olanes, Grumos, Arrugas": g("Fallas en material parches, Olanes, Grumos, Arrugas"),
+    "Esperar Grabado": g("Esperar Grabado"),
+    "Total TM Ajustes": totPorCat.ajuste,
+    "Rasquetas": g("Rasquetas"),
+    "Anilox, mangas": g("Anilox, mangas"),
+    "Cliches": g("Cliches"),
+    "Destapar anilox": g("Destapar anilox"),
+    "Destapar Mangueras": g("Destapar Mangueras"),
+    "Tambor": g("Tambor"),
+    "Limpieza de bombas": g("Limpieza de bombas"),
+    "Limpieza placas": g("Limpieza placas"),
+    "Grabados": g("Grabados"),
+    "Total TM Limpieza": totPorCat.limpieza,
+    "Falta material nuevo": g("Falta material nuevo"),
+    "Material de ajuste": g("Material de ajuste"),
+    "Preparar material": g("Preparar material"),
+    "Falta de Tintas": g("Falta de Tintas"),
+    "Falta de Grabados ": g("Falta de Grabados"),
+    "Falta de Programa": g("Falta de Programa"),
+    "Total TM Faltantes": totPorCat.faltantes,
+    "Junta Extraordinaria": g("Junta Extraordinaria"),
+    "Falta de personal": g("Falta de personal"),
+    "Entrega de turno": g("Entrega de turno"),
+    "llenado de Reportes y tirar merma": g("llenado de Reportes y tirar merma"),
+    "Sacar estándares": g("Sacar estándares"),
+    "Cambio de bobina": g("Cambio de bobina"),
+    "Espera de Grabados": g("Espera de Grabados"),
+    "Espera de montaje": g("Espera de montaje"),
+    "Limpieza área": g("Limpieza área"),
+    "Total TM fallas OP": totPorCat.operativo,
+    "Total TM Operativo": totOp,
+    "Falla": corrFallas.map(e=>e.concepto).join("; "),
+    "Orden de trabajo": corrFallas.map(e=>e.ot||"").join("; "),
+    "Minutos": corrFallas.map(e=>e.minutos).join("; "),
+    "Total TM Impresión": totDia,
+    "Tiempo disponible": 480,
+    "Tiempo Real prod.": MIN_PLANEADOS,
+    "% Disponibilidad": disp,
+    "Prod. Planeada": capTeo,
+    "Prod. Real": mtsR,
+    "% Rendimiento": rend,
+    "Metros fabricados": mtsR,
+    "Metros liberados": mtsR-mermaM,
+    "% Caldiad": cal,
+    "ETE": ete,
+    "Minutos Faltantes por reportar": MIN_PLANEADOS-totOp
+  };
+
+  try {
+    const res=await fetch(PA_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+    if(res.ok||res.status===202){
+      document.getElementById("successDetail").innerHTML=`
+        <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Máquina:</span> <b style="color:#0D18A8">${turno.maquina}</b></p>
+        <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Operador:</span> <b style="color:#0D18A8">${turno.operador}</b></p>
+        <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Turno:</span> <b style="color:#0D18A8">${turno.turno}</b> · ${turno.fecha}</p>
+        <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Eventos:</span> <b style="color:#0D18A8">${eventos.length}</b></p>
+        <p style="font-size:13px;"><span style="color:#888">ETE:</span> <b style="color:#0D18A8">${ete}%</b> &nbsp;·&nbsp; <span style="color:#888">TM Total:</span> <b style="color:#0D18A8">${totDia} min</b></p>`;
+      showScreen("screenSuccess");
+    } else {
+      throw new Error("Status: "+res.status);
+    }
+  } catch(err){
+    console.error(err);
+    document.getElementById("errorGuardar").style.display="block";
+  }
+  this.disabled=false; this.textContent="Guardar reporte";
+});
+
+document.getElementById("btnNuevoTurno").addEventListener("click",()=>{
+  turno={}; eventos=[];
+  document.getElementById("turnoBadge").style.display="none";
+  document.getElementById("ctxBar").style.display="none";
+  document.getElementById("kpiBar").style.display="none";
+  ["hNomina","hVel","hTurno","hMaquina","hCoord"].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value="";
+  });
+  document.getElementById("hNombreChip").innerHTML="";
+  document.getElementById("hFecha").value=today();
+  showScreen("screenInicio");
+});
+</script>
+</body>
+</html>
