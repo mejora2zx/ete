@@ -641,25 +641,20 @@ document.getElementById("btnGuardar").addEventListener("click",async function(){
   };
 
   try {
-    const res=await fetch(PA_URL,{
+    await fetch(PA_URL,{
       method:"POST",
       mode:"no-cors",
-      headers:{"Content-Type":"application/json"},
+      headers:{"Content-Type":"text/plain"},
       body:JSON.stringify(payload)
     });
-    // no-cors siempre devuelve opaque, asumimos éxito si no hay excepción
-    const ok=true;
-    if(ok){
-      document.getElementById("successDetail").innerHTML=`
-        <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Máquina:</span> <b style="color:#0D18A8">${turno.maquina}</b></p>
-        <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Operador:</span> <b style="color:#0D18A8">${turno.operador}</b></p>
-        <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Turno:</span> <b style="color:#0D18A8">${turno.turno}</b> · ${turno.fecha}</p>
-        <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Eventos:</span> <b style="color:#0D18A8">${eventos.length}</b></p>
-        <p style="font-size:13px;"><span style="color:#888">ETE:</span> <b style="color:#0D18A8">${ete}%</b> &nbsp;·&nbsp; <span style="color:#888">TM Total:</span> <b style="color:#0D18A8">${totDia} min</b></p>`;
-      showScreen("screenSuccess");
-    } else {
-      throw new Error("Status: "+res.status);
-    }
+    // con no-cors no podemos leer la respuesta, asumimos éxito
+    document.getElementById("successDetail").innerHTML=`
+      <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Máquina:</span> <b style="color:#0D18A8">${turno.maquina}</b></p>
+      <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Operador:</span> <b style="color:#0D18A8">${turno.operador}</b></p>
+      <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Turno:</span> <b style="color:#0D18A8">${turno.turno}</b> · ${turno.fecha}</p>
+      <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Eventos:</span> <b style="color:#0D18A8">${eventos.length}</b></p>
+      <p style="font-size:13px;"><span style="color:#888">ETE:</span> <b style="color:#0D18A8">${ete}%</b> &nbsp;·&nbsp; <span style="color:#888">TM Total:</span> <b style="color:#0D18A8">${totDia} min</b></p>`;
+    showScreen("screenSuccess");
   } catch(err){
     console.error(err);
     document.getElementById("errorGuardar").style.display="block";
