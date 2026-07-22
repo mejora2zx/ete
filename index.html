@@ -343,18 +343,38 @@ function renderEventos(){
   }
   el.innerHTML=eventos.map((e,i)=>{
     const cat=CATEGORIAS.find(c=>c.id===e.catId)||{color:"#c00",label:"Correctivo"};
-    return `<div class="evento">
+    return `<div class="evento" id="evento-${i}">
       <div class="evento-dot" style="background:${cat.color}"></div>
       <div class="evento-info">
         <div class="evento-nombre">${e.concepto}</div>
         <div class="evento-cat">${cat.label} · ${e.hora}</div>
       </div>
-      <div class="evento-min">${e.minutos} min</div>
-      <button class="evento-del" data-i="${i}">×</button>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div class="evento-min" id="emin-${i}">${e.minutos} min</div>
+        <button class="evento-edit" data-i="${i}" title="Editar" style="background:none;border:none;cursor:pointer;color:#0D18A8;font-size:15px;padding:0 2px;">✏️</button>
+        <button class="evento-del" data-i="${i}">×</button>
+      </div>
     </div>`;
   }).join("");
   el.querySelectorAll(".evento-del").forEach(btn=>{
     btn.addEventListener("click",function(){eventos.splice(parseInt(this.dataset.i),1);renderEventos();updateKPIs();});
+  });
+  el.querySelectorAll(".evento-edit").forEach(btn=>{
+    btn.addEventListener("click",function(){
+      const i=parseInt(this.dataset.i);
+      const minDiv=document.getElementById("emin-"+i);
+      const actual=eventos[i].minutos;
+      minDiv.innerHTML=`<input type="number" min="1" value="${actual}" 
+        style="width:60px;padding:4px 6px;font-size:13px;border:1.5px solid #0D18A8;border-radius:6px;text-align:center;"
+        id="einput-${i}"/>
+        <button data-i="${i}" class="btn-confirmar-edit" style="background:#0D18A8;color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer;margin-left:4px;">✓</button>`;
+      document.getElementById("einput-"+i).focus();
+      document.querySelector(`.btn-confirmar-edit[data-i="${i}"]`).addEventListener("click",function(){
+        const nuevo=parseInt(document.getElementById("einput-"+i).value)||0;
+        if(nuevo>0){ eventos[i].minutos=nuevo; }
+        renderEventos(); updateKPIs();
+      });
+    });
   });
   renderResumenCat();
 }
