@@ -39,6 +39,11 @@ label{font-size:12px;color:#555;font-weight:500;display:block;margin-bottom:4px;
 input,select,textarea{width:100%;padding:8px 11px;font-size:14px;
   border:1.5px solid #c5c9f7;border-radius:8px;background:#fff;color:#111;outline:none;}
 input:focus,select:focus,textarea:focus{border-color:#0D18A8;}
+.field-error input,.field-error select,.field-error textarea{border-color:#e00!important;background:#fff5f5;}
+.field-error label{color:#e00;}
+.field-error-msg{font-size:11px;color:#e00;margin-top:3px;display:none;}
+.field-error .field-error-msg{display:block;}
+.alert-required{background:#fff0f0;border:1.5px solid #e00;border-radius:8px;padding:10px 14px;font-size:13px;color:#c00;margin-bottom:12px;display:none;}
 textarea{resize:vertical;height:64px;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .nombre-chip{margin-top:4px;padding:6px 10px;background:#e8eafc;border-radius:6px;
@@ -121,15 +126,21 @@ textarea{resize:vertical;height:64px;}
       <div class="field"><label>Máquina</label>
         <select id="hMaquina"><option value="">Selecciona…</option><option>Imp.4</option><option>Imp.5</option><option>Imp.8</option><option>Imp.9</option><option>Imp.11</option></select>
       </div>
-      <div class="field"><label># Nómina</label>
+      <div class="field" id="fNomina"><label># Nómina</label>
         <input id="hNomina" type="number" placeholder="Ej. 2626"/>
         <div id="hNombreChip"></div>
+        <span class="field-error-msg">Campo requerido</span>
       </div>
-      <div class="field"><label>Coordinador</label>
+      <div class="field" id="fCoord"><label>Coordinador</label>
         <select id="hCoord"><option value="">Selecciona…</option><option>Alejandro Andrade</option><option>Humberto Moreno</option><option>Eduardo González</option></select>
+        <span class="field-error-msg">Campo requerido</span>
       </div>
-      <div class="field"><label>Velocidad (Mts/Min)</label><input id="hVel" type="number" placeholder="60"/></div>
+      <div class="field" id="fVel"><label>Velocidad (Mts/Min)</label>
+        <input id="hVel" type="number" placeholder="60"/>
+        <span class="field-error-msg">Campo requerido</span>
+      </div>
     </div>
+    <div class="alert-required" id="alertEncabezado">⚠️ Completa todos los campos antes de iniciar el turno.</div>
     <button class="btn-primary" id="btnIniciarTurno">Iniciar turno →</button>
   </div>
 </div>
@@ -293,7 +304,23 @@ document.getElementById("btnIniciarTurno").addEventListener("click",function(){
   const nom=document.getElementById("hNomina").value;
   const coord=document.getElementById("hCoord").value;
   const vel=document.getElementById("hVel").value;
-  if(!fecha||!t||!maq||!nom||!coord||!vel){alert("Completa todos los campos para iniciar el turno.");return;}
+
+  // Limpiar errores previos
+  ["fNomina","fCoord","fVel"].forEach(id=>{
+    document.getElementById(id).classList.remove("field-error");
+  });
+  document.getElementById("alertEncabezado").style.display="none";
+
+  // Validar campos
+  let hayError=false;
+  if(!nom){document.getElementById("fNomina").classList.add("field-error");hayError=true;}
+  if(!coord){document.getElementById("fCoord").classList.add("field-error");hayError=true;}
+  if(!vel){document.getElementById("fVel").classList.add("field-error");hayError=true;}
+  if(!t||!maq||!fecha||hayError){
+    document.getElementById("alertEncabezado").style.display="block";
+    document.getElementById("alertEncabezado").scrollIntoView({behavior:"smooth"});
+    return;
+  }
   const nombre=PERSONAL[parseInt(nom)]||nom;
   turno={fecha,turno:t,maquina:maq,nomina:nom,operador:nombre,coordinador:coord,velocidad:parseFloat(vel),semana:weekNum()};
   eventos=[];
@@ -455,7 +482,18 @@ document.getElementById("btnGuardarCorr").addEventListener("click",()=>{
   const falla=document.getElementById("corrFalla").value.trim();
   const ot=document.getElementById("corrOT").value.trim();
   const min=parseInt(document.getElementById("corrMin").value)||0;
-  if(!falla||min<=0){alert("Captura la descripción y los minutos.");return;}
+
+  // Limpiar errores
+  ["fCorrOT","fCorrMin"].forEach(id=>document.getElementById(id).classList.remove("field-error"));
+  document.getElementById("alertCorr").style.display="none";
+
+  let hayError=false;
+  if(!ot){document.getElementById("fCorrOT").classList.add("field-error");hayError=true;}
+  if(min<=0){document.getElementById("fCorrMin").classList.add("field-error");hayError=true;}
+  if(!falla||hayError){
+    document.getElementById("alertCorr").style.display="block";
+    return;
+  }
   const ahora=new Date();
   const hora=String(ahora.getHours()).padStart(2,"0")+":"+String(ahora.getMinutes()).padStart(2,"0");
   eventos.push({tipo:"correctivo",catId:"correctivo",concepto:falla,ot,minutos:min,hora});
