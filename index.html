@@ -484,13 +484,15 @@ document.getElementById("btnGuardarCorr").addEventListener("click",()=>{
   const min=parseInt(document.getElementById("corrMin").value)||0;
 
   // Limpiar errores
-  ["fCorrOT","fCorrMin"].forEach(id=>document.getElementById(id).classList.remove("field-error"));
+  document.getElementById("fCorrOT").classList.remove("field-error");
+  document.getElementById("fCorrMin").classList.remove("field-error");
   document.getElementById("alertCorr").style.display="none";
 
   let hayError=false;
+  if(!falla){hayError=true;}
   if(!ot){document.getElementById("fCorrOT").classList.add("field-error");hayError=true;}
   if(min<=0){document.getElementById("fCorrMin").classList.add("field-error");hayError=true;}
-  if(!falla||hayError){
+  if(hayError){
     document.getElementById("alertCorr").style.display="block";
     return;
   }
@@ -532,6 +534,8 @@ function renderKPIFinal(){
   const cal=mtsR>0?parseFloat((((mtsR-mermaM)/mtsR)*100).toFixed(2)):0;
   const disp=parseFloat(((MIN_PLANEADOS/480)*100).toFixed(2));
   const ete=parseFloat(((disp/100)*(rend/100)*(cal/100)*100).toFixed(2));
+  const pesoID=pesoID_val;
+  const mtsBob=mtsBob_val;
   const totTM=sumEventos();
   document.getElementById("kpiFinal").innerHTML=[
     ["Cap. Teórica",capTeo.toLocaleString()+" mts"],["Metros Reales",mtsR.toLocaleString()+" mts"],
@@ -564,6 +568,40 @@ document.getElementById("btnGuardar").addEventListener("click",async function(){
   document.getElementById("errorTM").style.display="none";
   document.getElementById("errorGuardar").style.display="none";
 
+  // Validar datos de producción
+  const mtsR=parseFloat(document.getElementById("cMtsR").value)||0;
+  const kg=parseFloat(document.getElementById("cKg").value)||0;
+  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
+  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
+
+  const camposProd=[
+    {id:"cMtsR",val:mtsR,label:"Metros Reales"},
+    {id:"cKg",val:kg,label:"Merma (KG)"},
+    {id:"cPesoID",val:pesoID,label:"Peso ID Bobina"},
+    {id:"cMtsBob",val:mtsBob,label:"Metros por bobina"},
+  ];
+
+  // Limpiar errores previos
+  camposProd.forEach(c=>{
+    document.getElementById(c.id).style.borderColor="";
+    document.getElementById(c.id).style.background="";
+  });
+
+  const faltantes=camposProd.filter(c=>c.val<=0);
+  if(faltantes.length>0){
+    faltantes.forEach(c=>{
+      document.getElementById(c.id).style.borderColor="#e00";
+      document.getElementById(c.id).style.background="#fff5f5";
+    });
+    const nombres=faltantes.map(c=>c.label).join(", ");
+    document.getElementById("errorGuardar").style.display="block";
+    document.getElementById("errorGuardar").innerHTML=`⚠️ Completa los siguientes campos antes de guardar: <b>${nombres}</b>`;
+    document.getElementById("errorGuardar").style.background="#fff0f0";
+    document.getElementById("errorGuardar").style.borderColor="#e00";
+    document.getElementById("errorGuardar").style.color="#c00";
+    return;
+  }
+
   // VALIDACIÓN: TM no puede superar minutos planeados
   const totTM=sumEventos();
   if(totTM>MIN_PLANEADOS){
@@ -576,10 +614,9 @@ document.getElementById("btnGuardar").addEventListener("click",async function(){
 
   this.disabled=true; this.textContent="Guardando…";
 
-  const mtsR=parseFloat(document.getElementById("cMtsR").value)||0;
-  const mermaKg=parseFloat(document.getElementById("cKg").value)||0;
-  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
-  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
+  const mermaKg=kg;
+  const pesoID_val=pesoID;
+  const mtsBob_val=mtsBob;
   const mermaM=getMermaMetros();
   const capTeo=turno.velocidad*MIN_PLANEADOS;
   const rend=capTeo>0?parseFloat(((mtsR/capTeo)*100).toFixed(2)):0;
