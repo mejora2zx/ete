@@ -9,12 +9,10 @@
 body{background:#f0f2ff;min-height:100vh;}
 .topbar{background:#0D18A8;padding:14px 16px;position:sticky;top:0;z-index:100;}
 .topbar-row{display:flex;align-items:center;gap:10px;}
-.logo{background:rgba(255,255,255,0.15);border-radius:8px;width:38px;height:38px;
-  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;}
+.logo{background:rgba(255,255,255,0.15);border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;}
 .topbar h1{color:#fff;font-size:16px;font-weight:600;}
 .topbar p{color:rgba(255,255,255,0.7);font-size:11px;}
-.turno-badge{margin-left:auto;background:rgba(255,255,255,0.15);border-radius:20px;
-  padding:4px 12px;color:#fff;font-size:12px;font-weight:500;}
+.turno-badge{margin-left:auto;background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px;color:#fff;font-size:12px;font-weight:500;}
 .ctx-bar{background:#0a1385;padding:8px 16px;display:flex;gap:16px;flex-wrap:wrap;}
 .ctx-item{color:rgba(255,255,255,0.8);font-size:11px;}
 .ctx-item b{color:#fff;font-size:12px;}
@@ -25,49 +23,38 @@ body{background:#f0f2ff;min-height:100vh;}
 .main{max-width:640px;margin:0 auto;padding:16px 16px 100px;}
 .card{background:#fff;border-radius:12px;border:1px solid #e0e3f8;padding:16px;margin-bottom:14px;}
 .card-title{font-size:14px;font-weight:600;color:#0D18A8;margin-bottom:12px;}
-.btn-primary{background:#0D18A8;color:#fff;border:none;border-radius:8px;
-  padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
+.btn-primary{background:#0D18A8;color:#fff;border:none;border-radius:8px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
 .btn-primary:hover{background:#0a1385;}
 .btn-primary:disabled{background:#aaa;cursor:not-allowed;}
-.btn-secondary{background:#fff;color:#0D18A8;border:1.5px solid #0D18A8;border-radius:8px;
-  padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
+.btn-secondary{background:#fff;color:#0D18A8;border:1.5px solid #0D18A8;border-radius:8px;padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
 .btn-secondary:hover{background:#e8eafc;}
-.btn-danger{background:#fff;color:#c00;border:1.5px solid #fcc;border-radius:8px;
-  padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
+.btn-danger{background:#fff;color:#c00;border:1.5px solid #e00;border-radius:8px;padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;}
 .field{margin-bottom:12px;}
 label{font-size:12px;color:#555;font-weight:500;display:block;margin-bottom:4px;}
-input,select,textarea{width:100%;padding:8px 11px;font-size:14px;
-  border:1.5px solid #c5c9f7;border-radius:8px;background:#fff;color:#111;outline:none;}
+input,select,textarea{width:100%;padding:8px 11px;font-size:14px;border:1.5px solid #c5c9f7;border-radius:8px;background:#fff;color:#111;outline:none;}
 input:focus,select:focus,textarea:focus{border-color:#0D18A8;}
-.field-error input,.field-error select,.field-error textarea{border-color:#e00!important;background:#fff5f5;}
-.field-error label{color:#e00;}
-.field-error-msg{font-size:11px;color:#e00;margin-top:3px;display:none;}
-.field-error .field-error-msg{display:block;}
-.alert-required{background:#fff0f0;border:1.5px solid #e00;border-radius:8px;padding:10px 14px;font-size:13px;color:#c00;margin-bottom:12px;display:none;}
 textarea{resize:vertical;height:64px;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.nombre-chip{margin-top:4px;padding:6px 10px;background:#e8eafc;border-radius:6px;
-  border:1px solid #c5c9f7;font-size:12px;color:#0D18A8;font-weight:500;}
-.nombre-err{margin-top:4px;padding:6px 10px;background:#fff0f0;border-radius:6px;
-  border:1px solid #fcc;font-size:12px;color:#c00;}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;
-  display:flex;align-items:flex-end;justify-content:center;}
-.modal{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:640px;
-  padding:16px 16px 24px;max-height:85vh;overflow-y:auto;display:flex;flex-direction:column;}
-.modal-body{flex:1;overflow-y:auto;}  
-.modal-title{font-size:16px;font-weight:700;color:#0D18A8;margin-bottom:16px;
-  display:flex;justify-content:space-between;align-items:center;}
+.nombre-chip{margin-top:4px;padding:6px 10px;background:#e8eafc;border-radius:6px;border:1px solid #c5c9f7;font-size:12px;color:#0D18A8;font-weight:500;}
+.nombre-err{margin-top:4px;padding:6px 10px;background:#fff0f0;border-radius:6px;border:1px solid #fcc;font-size:12px;color:#c00;}
+.field-err input,.field-err select{border-color:#e00!important;background:#fff5f5;}
+.field-err label{color:#e00;}
+.err-msg{font-size:11px;color:#e00;margin-top:3px;display:none;}
+.field-err .err-msg{display:block;}
+.alert-box{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;display:none;}
+.alert-red{background:#fff0f0;border:1.5px solid #e00;color:#c00;}
+.alert-yellow{background:#fff8e1;border:1.5px solid #ffc107;color:#856404;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;display:flex;align-items:flex-end;justify-content:center;}
+.modal{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:640px;padding:16px 16px 24px;max-height:85vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:700;color:#0D18A8;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
 .btn-close{background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1;}
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
-.cat-chip{padding:10px 12px;border-radius:10px;border:2px solid transparent;
-  cursor:pointer;font-size:13px;font-weight:500;text-align:center;transition:all .15s;}
+.cat-chip{padding:10px 12px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:13px;font-weight:500;text-align:center;}
 .concepto-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;max-height:160px;overflow-y:auto;}
-.concepto-item{padding:9px 12px;border-radius:8px;border:1.5px solid #e0e3f8;
-  cursor:pointer;font-size:13px;color:#333;}
+.concepto-item{padding:9px 12px;border-radius:8px;border:1.5px solid #e0e3f8;cursor:pointer;font-size:13px;color:#333;}
 .concepto-item:hover{border-color:#0D18A8;background:#f0f2ff;}
 .concepto-item.sel{border-color:#0D18A8;background:#e8eafc;color:#0D18A8;font-weight:500;}
-.evento{display:flex;align-items:center;gap:10px;padding:10px 12px;
-  border-radius:8px;border:1px solid #e0e3f8;margin-bottom:6px;background:#fafbff;}
+.evento{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid #e0e3f8;margin-bottom:6px;background:#fafbff;}
 .evento-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .evento-info{flex:1;}
 .evento-nombre{font-size:13px;font-weight:500;color:#222;}
@@ -76,19 +63,13 @@ textarea{resize:vertical;height:64px;}
 .evento-del{background:none;border:none;color:#ccc;cursor:pointer;font-size:18px;padding:0 4px;}
 .evento-del:hover{color:#c00;}
 .empty-state{text-align:center;padding:24px 16px;color:#aaa;font-size:13px;}
-.cat-resumen{display:flex;justify-content:space-between;align-items:center;
-  padding:8px 12px;border-radius:8px;margin-bottom:5px;}
-.bottom-cta{position:fixed;bottom:0;left:0;right:0;background:#fff;
-  border-top:1px solid #e0e3f8;padding:12px 16px;z-index:99;}
+.cat-resumen{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-radius:8px;margin-bottom:5px;}
+.bottom-cta{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e0e3f8;padding:12px 16px;z-index:99;}
 .bottom-cta-inner{max-width:640px;margin:0 auto;display:flex;gap:8px;}
 .screen{display:none;}
 .screen.active{display:block;}
 .success-wrap{text-align:center;padding:2rem 1rem;}
-.success-icon{width:64px;height:64px;border-radius:50%;background:#0D18A8;
-  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;color:#fff;}
-.alert-box{padding:12px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;}
-.alert-error{background:#fff0f0;border:1.5px solid #f99;color:#c00;}
-.alert-warning{background:#fff8e1;border:1.5px solid #ffc107;color:#856404;}
+.success-icon{width:64px;height:64px;border-radius:50%;background:#0D18A8;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;color:#fff;}
 </style>
 </head>
 <body>
@@ -118,29 +99,31 @@ textarea{resize:vertical;height:64px;}
     </div>
     <div class="card">
       <div class="grid2">
-        <div class="field"><label>Fecha</label><input id="hFecha"/></div>
-        <div class="field"><label>Turno</label>
+        <div class="field" id="fFecha"><label>Fecha</label><input id="hFecha"/><span class="err-msg">Requerido</span></div>
+        <div class="field" id="fTurno"><label>Turno</label>
           <select id="hTurno"><option value="">Selecciona…</option><option>Día</option><option>Tarde</option><option>Noche</option></select>
+          <span class="err-msg">Requerido</span>
         </div>
       </div>
-      <div class="field"><label>Máquina</label>
+      <div class="field" id="fMaquina"><label>Máquina</label>
         <select id="hMaquina"><option value="">Selecciona…</option><option>Imp.4</option><option>Imp.5</option><option>Imp.8</option><option>Imp.9</option><option>Imp.11</option></select>
+        <span class="err-msg">Requerido</span>
       </div>
       <div class="field" id="fNomina"><label># Nómina</label>
         <input id="hNomina" type="number" placeholder="Ej. 2626"/>
         <div id="hNombreChip"></div>
-        <span class="field-error-msg">Campo requerido</span>
+        <span class="err-msg">Requerido</span>
       </div>
       <div class="field" id="fCoord"><label>Coordinador</label>
         <select id="hCoord"><option value="">Selecciona…</option><option>Alejandro Andrade</option><option>Humberto Moreno</option><option>Eduardo González</option></select>
-        <span class="field-error-msg">Campo requerido</span>
+        <span class="err-msg">Requerido</span>
       </div>
       <div class="field" id="fVel"><label>Velocidad (Mts/Min)</label>
         <input id="hVel" type="number" placeholder="60"/>
-        <span class="field-error-msg">Campo requerido</span>
+        <span class="err-msg">Requerido</span>
       </div>
     </div>
-    <div class="alert-required" id="alertEncabezado">⚠️ Completa todos los campos antes de iniciar el turno.</div>
+    <div class="alert-box alert-red" id="alertEncabezado">⚠️ Completa todos los campos antes de iniciar el turno.</div>
     <button class="btn-primary" id="btnIniciarTurno">Iniciar turno →</button>
   </div>
 </div>
@@ -156,7 +139,7 @@ textarea{resize:vertical;height:64px;}
       </div>
     </div>
     <div class="card">
-      <div class="card-title" style="justify-content:space-between;display:flex;">
+      <div class="card-title" style="display:flex;justify-content:space-between;">
         <span>📋 Eventos del turno</span>
         <span id="eventoCount" style="font-size:12px;color:#888;font-weight:400;"></span>
       </div>
@@ -180,10 +163,10 @@ textarea{resize:vertical;height:64px;}
     <div class="card">
       <div class="card-title">📦 Datos de producción</div>
       <div class="grid2">
-        <div class="field"><label>Metros Reales</label><input id="cMtsR" type="number" placeholder="0"/></div>
-        <div class="field"><label>Merma (KG)</label><input id="cKg" type="number" placeholder="0"/></div>
-        <div class="field"><label>Peso ID Bobina</label><input id="cPesoID" type="number" placeholder="0"/></div>
-        <div class="field"><label>Metros por bobina</label><input id="cMtsBob" type="number" placeholder="0"/></div>
+        <div class="field" id="fMtsR"><label>Metros Reales</label><input id="cMtsR" type="number" placeholder="0"/><span class="err-msg">Requerido</span></div>
+        <div class="field" id="fKg"><label>Merma (KG)</label><input id="cKg" type="number" placeholder="0"/><span class="err-msg">Requerido</span></div>
+        <div class="field" id="fPesoID"><label>Peso ID Bobina</label><input id="cPesoID" type="number" placeholder="0"/><span class="err-msg">Requerido</span></div>
+        <div class="field" id="fMtsBob"><label>Metros por bobina</label><input id="cMtsBob" type="number" placeholder="0"/><span class="err-msg">Requerido</span></div>
       </div>
       <div id="mermaCalcBox" style="display:none;margin-top:8px;padding:10px 12px;background:#e8eafc;border-radius:8px;border:1px solid #c5c9f7;font-size:13px;color:#0D18A8;">
         📐 Merma calculada: <b id="mermaCalcVal">0</b> metros
@@ -201,14 +184,9 @@ textarea{resize:vertical;height:64px;}
     <div class="card">
       <div class="field"><label>Observaciones</label><textarea id="cObs"></textarea></div>
     </div>
-    <div id="errorTM" class="alert-box alert-warning" style="display:none">
-      ⚠️ <b>El tiempo muerto total supera los 400 minutos planeados.</b><br/>
-      Por favor revisa los eventos registrados antes de guardar.<br/>
-      <span id="errorTMDetalle" style="font-size:12px;"></span>
-    </div>
-    <div id="errorGuardar" class="alert-box alert-error" style="display:none">
-      ❌ Error al conectar con Power Automate. Verifica tu conexión e intenta de nuevo.
-    </div>
+    <div class="alert-box alert-yellow" id="errorTM">⚠️ <b>El tiempo muerto total supera los 400 minutos planeados.</b><br/><span id="errorTMDetalle" style="font-size:12px;"></span></div>
+    <div class="alert-box alert-red" id="errorProd"></div>
+    <div class="alert-box alert-red" id="errorGuardar">❌ Error al conectar. Verifica tu conexión e intenta de nuevo.</div>
     <div style="display:flex;gap:8px;margin-bottom:8px;">
       <button class="btn-secondary" id="btnVolverTurno" style="flex:1">← Volver</button>
       <button class="btn-primary" id="btnGuardar" style="flex:2">Guardar reporte</button>
@@ -250,30 +228,35 @@ textarea{resize:vertical;height:64px;}
 <div class="modal-overlay" id="modalCorr" style="display:none">
   <div class="modal">
     <div class="modal-title">🔧 Tiempo Muerto Correctivo<button class="btn-close" id="btnCerrarCorr">✕</button></div>
-    <div class="field"><label>Descripción de la falla</label><input id="corrFalla" placeholder="Describe la falla…"/></div>
-    <div class="field"><label># Orden de Trabajo</label><input id="corrOT" placeholder="Ej. 4521"/></div>
-    <div class="field"><label>Minutos</label><input id="corrMin" type="number" min="1" placeholder="Ej. 30"/></div>
+    <div class="field" id="fCorrFalla"><label>Descripción de la falla <span style="color:#e00">*</span></label>
+      <input id="corrFalla" placeholder="Describe la falla…"/>
+      <span class="err-msg">Requerido</span>
+    </div>
+    <div class="field" id="fCorrOT"><label># Orden de Trabajo <span style="color:#e00">*</span></label>
+      <input id="corrOT" placeholder="Ej. 4521"/>
+      <span class="err-msg">Requerido</span>
+    </div>
+    <div class="field" id="fCorrMin"><label>Minutos <span style="color:#e00">*</span></label>
+      <input id="corrMin" type="number" min="1" placeholder="Ej. 30"/>
+      <span class="err-msg">Requerido</span>
+    </div>
+    <div class="alert-box alert-red" id="alertCorr">⚠️ Completa todos los campos requeridos.</div>
     <button class="btn-primary" id="btnGuardarCorr">Registrar falla</button>
   </div>
 </div>
 
 <script>
-const PA_URL = "https://script.google.com/macros/s/AKfycbyIzLhPZkkAdCZV3Nx3O2VHdNZcmNXJ_Tj6nmWYDA5TzPf8FYcOmXUVp-c4feRJkbryYA/exec";
-const MIN_PLANEADOS = 400;
+const PA_URL="https://script.google.com/macros/s/AKfycbyIzLhPZkkAdCZV3Nx3O2VHdNZcmNXJ_Tj6nmWYDA5TzPf8FYcOmXUVp-c4feRJkbryYA/exec";
+const MIN_PLANEADOS=400;
 
 const PERSONAL={2060:"MARTINEZ PEREZ LUIS ANGEL",2281:"GONZALEZ GONZALEZ EDUARDO",2303:"SANCHEZ CORONADO ROBERTO ALEJANDRO",2316:"CRUZ HERNANDEZ JUAN ANGEL",2352:"NUÑEZ PACHECO JOSE EFRAIN",2459:"RODRIGUEZ ZAVALA JOSE ANTONIO",2492:"RODRIGUEZ PEREZ JAIR ALEJANDRO",2580:"BOCANEGRA MONCADA JOEL",2596:"SALINAS RAMIREZ MARIO HUMBERTO",2626:"ESQUIVEL SALAS MANUEL ALEJANDRO",2657:"TORRES GONZALEZ ABRAHAM",2676:"RODRIGUEZ GUZMAN JESUS",2677:"RODRIGUEZ GUZMAN DAVID",2695:"ROJAS JARAMILLO IGNACIO RAMON",2706:"GONZALEZ MUÑIZ JUAN ENRIQUE",2732:"PEREZ JIMENEZ CARLOS ALEJANDRO",2764:"ANDRADE ARIAS JESUS ALEJANDRO",2866:"ARMIJO SAAVEDRA SAMUEL",2879:"MALDONADO DURAN OZIEL EMMANUEL",2883:"MORALES CAMPOS DAVID",2886:"HERRERA VALERO JOSE JOAQUIN",2937:"HERNANDEZ CEDILLO ELIUD OSVALDO",2950:"JIMENEZ RIVERA JUAN ANTONIO",2958:"GARCIA OCHOA JUAN FRANCISCO",2964:"MORENO BADILLO JUAN HUMBERTO",2979:"OCHOA SOLIS RAYMUNDO",2980:"MARTINEZ OCHOA BRANDON GILBERTO",2981:"DOMINGUEZ ULLOA MARTIN JOVANI",2983:"OCHOA MARTINEZ MIGUEL ANGEL",3065:"SANCHEZ GONZALEZ BRANDON IMANOL",3069:"GONZALEZ BRANDON",3079:"BOCANEGRA LEIJA MICHELLE ALDAIR",3097:"SALAS SOTO CARLOS ALBERTO",3103:"GUZMAN RODRIGUEZ MIGUEL NICOLAS",3252:"PALOMO NOROÑA JAVIER",3292:"GARCIA GALVAN VICTOR",3296:"GOMEZ HERRERA JOSE ORLANDO",3307:"LOPEZ PEREZ BERSAIN",3328:"PEREZ JIMENEZ ROSEY DE JESUS",3351:"BRIONES MARTINEZ DAVID ALBERTO",3374:"SANCHEZ TIENDA JOSE FERNANDO",3376:"GARCIA CARREON FRANCISCO JAVIER",3422:"GONZALEZ SANCHEZ MARIO ALEXIS",3470:"NAFARRATE GOMEZ JOSE FRANCISCO",3472:"GOMEZ CARDONA JOSE DOMINGO",3477:"VILLEGAS MARTINEZ LUIS ALBERTO",3535:"DIAZ GUTIERREZ JOSIEL",3542:"GOMEZ TAPIA EDWIN ORLANDO",3553:"GONZALEZ LOPEZ CESAR HUMBERTO",3582:"GOMEZ TAPIA JOSE FRANCISCO",3612:"DELGADO LEIJA MARCO ANTONIO",3622:"SEPULVEDA FRAGA MARCOS NATANAEL",3626:"BERMEA LOPEZ EDUARDO",3631:"CARREON LARA ANGEL EDUARDO",3632:"RAMIREZ SANTOS KEVIN ALEJANDRO",3642:"RAMIREZ MUÑIZ GERARDO ALBERTO",3643:"AGUILAR CUEVAS ARMANDO",3655:"GONZALEZ ALVAREZ JUAN PABLO",3659:"ESTRADA CHACON JULIO DANIEL",3666:"HUERTA MORALES JUAN PABLO",3669:"LOPEZ PEREZ AURELIO",3670:"HERNANDEZ IZQUIERDO JORGE RAUL",3686:"SILGUERO VILLEGAS MILTON MISAEL"};
 
 const CATEGORIAS=[
-  {id:"cambio",label:"Cambio de Modelo",color:"#0D18A8",bg:"#e8eafc",
-    conceptos:["Cambio de mangas / rodillos porta cliche","Cambio de Anillox","Lavado de bombas","Cambio de tinta","Vestido de maquina","Cambio de navajas y sellos en rasqueta","Poner ficha o desarrollo de rodillos","Calibracion de unidades","Ajuste de presión","Ajuste de Registro","Tonos","Cambio de modelo","Pruebas de desprendimiento (funda)","Liberación 1era. Pieza"]},
-  {id:"ajuste",label:"Paro por Ajustes",color:"#1a27c4",bg:"#eef0ff",
-    conceptos:["Unidades descalibradas","Ajuste o falla en rasqueta","Catalización","Checar Viscosidad","Ajuste de Mamparas","Falla o cambio Anilox","Ajuste o Cambio Grabados","Ajuste o Cambio del reverso","Ajuste de cierre en grabado","Sticky back","Calzar placa","Ajuste de Montaje","Ajustar presiones por falla de maquina","Fallas en material parches, Olanes, Grumos, Arrugas","Esperar Grabado"]},
-  {id:"limpieza",label:"Limpieza en Máquina",color:"#2e3fd4",bg:"#f0f2ff",
-    conceptos:["Rasquetas","Anilox, mangas","Cliches","Destapar anilox","Destapar Mangueras","Tambor","Limpieza de bombas","Limpieza placas","Grabados"]},
-  {id:"faltantes",label:"Fallas por Faltantes",color:"#0a1385",bg:"#e8eafc",
-    conceptos:["Falta material nuevo","Material de ajuste","Preparar material","Falta de Tintas","Falta de Grabados","Falta de Programa"]},
-  {id:"operativo",label:"T.M. Operativo",color:"#061070",bg:"#e8eafc",
-    conceptos:["Junta Extraordinaria","Falta de personal","Entrega de turno","llenado de Reportes y tirar merma","Sacar estándares","Cambio de bobina","Espera de Grabados","Espera de montaje","Limpieza área"]},
+  {id:"cambio",label:"Cambio de Modelo",color:"#0D18A8",bg:"#e8eafc",conceptos:["Cambio de mangas / rodillos porta cliche","Cambio de Anillox","Lavado de bombas","Cambio de tinta","Vestido de maquina","Cambio de navajas y sellos en rasqueta","Poner ficha o desarrollo de rodillos","Calibracion de unidades","Ajuste de presión","Ajuste de Registro","Tonos","Cambio de modelo","Pruebas de desprendimiento (funda)","Liberación 1era. Pieza"]},
+  {id:"ajuste",label:"Paro por Ajustes",color:"#1a27c4",bg:"#eef0ff",conceptos:["Unidades descalibradas","Ajuste o falla en rasqueta","Catalización","Checar Viscosidad","Ajuste de Mamparas","Falla o cambio Anilox","Ajuste o Cambio Grabados","Ajuste o Cambio del reverso","Ajuste de cierre en grabado","Sticky back","Calzar placa","Ajuste de Montaje","Ajustar presiones por falla de maquina","Fallas en material parches, Olanes, Grumos, Arrugas","Esperar Grabado"]},
+  {id:"limpieza",label:"Limpieza en Máquina",color:"#2e3fd4",bg:"#f0f2ff",conceptos:["Rasquetas","Anilox, mangas","Cliches","Destapar anilox","Destapar Mangueras","Tambor","Limpieza de bombas","Limpieza placas","Grabados"]},
+  {id:"faltantes",label:"Fallas por Faltantes",color:"#0a1385",bg:"#e8eafc",conceptos:["Falta material nuevo","Material de ajuste","Preparar material","Falta de Tintas","Falta de Grabados","Falta de Programa"]},
+  {id:"operativo",label:"T.M. Operativo",color:"#061070",bg:"#e8eafc",conceptos:["Junta Extraordinaria","Falta de personal","Entrega de turno","llenado de Reportes y tirar merma","Sacar estándares","Cambio de bobina","Espera de Grabados","Espera de montaje","Limpieza área"]},
 ];
 
 let turno={}, eventos=[], selCat=null, selConcepto=null;
@@ -284,10 +267,12 @@ function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classL
 function sumEventos(){return eventos.reduce((a,e)=>a+(parseInt(e.minutos)||0),0);}
 function getMermaMetros(){
   const kg=parseFloat(document.getElementById("cKg").value)||0;
-  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
-  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
-  return (kg>0&&mtsBob>0&&pesoID>0)?(kg*mtsBob)/pesoID:0;
+  const mb=parseFloat(document.getElementById("cMtsBob").value)||0;
+  const pi=parseFloat(document.getElementById("cPesoID").value)||0;
+  return (kg>0&&mb>0&&pi>0)?(kg*mb)/pi:0;
 }
+function clearFieldErr(id){document.getElementById(id).classList.remove("field-err");}
+function setFieldErr(id){document.getElementById(id).classList.add("field-err");}
 
 // INICIO
 document.getElementById("hFecha").value=today();
@@ -298,31 +283,22 @@ document.getElementById("hNomina").addEventListener("input",function(){
 });
 
 document.getElementById("btnIniciarTurno").addEventListener("click",function(){
-  const fecha=document.getElementById("hFecha").value;
-  const t=document.getElementById("hTurno").value;
-  const maq=document.getElementById("hMaquina").value;
-  const nom=document.getElementById("hNomina").value;
-  const coord=document.getElementById("hCoord").value;
-  const vel=document.getElementById("hVel").value;
-
-  // Limpiar errores previos
-  ["fNomina","fCoord","fVel"].forEach(id=>{
-    document.getElementById(id).classList.remove("field-error");
-  });
+  const fields=[
+    {id:"fFecha",val:document.getElementById("hFecha").value},
+    {id:"fTurno",val:document.getElementById("hTurno").value},
+    {id:"fMaquina",val:document.getElementById("hMaquina").value},
+    {id:"fNomina",val:document.getElementById("hNomina").value},
+    {id:"fCoord",val:document.getElementById("hCoord").value},
+    {id:"fVel",val:document.getElementById("hVel").value},
+  ];
+  fields.forEach(f=>clearFieldErr(f.id));
   document.getElementById("alertEncabezado").style.display="none";
-
-  // Validar campos
-  let hayError=false;
-  if(!nom){document.getElementById("fNomina").classList.add("field-error");hayError=true;}
-  if(!coord){document.getElementById("fCoord").classList.add("field-error");hayError=true;}
-  if(!vel){document.getElementById("fVel").classList.add("field-error");hayError=true;}
-  if(!t||!maq||!fecha||hayError){
-    document.getElementById("alertEncabezado").style.display="block";
-    document.getElementById("alertEncabezado").scrollIntoView({behavior:"smooth"});
-    return;
-  }
+  let err=false;
+  fields.forEach(f=>{if(!f.val){setFieldErr(f.id);err=true;}});
+  if(err){document.getElementById("alertEncabezado").style.display="block";return;}
+  const nom=document.getElementById("hNomina").value;
   const nombre=PERSONAL[parseInt(nom)]||nom;
-  turno={fecha,turno:t,maquina:maq,nomina:nom,operador:nombre,coordinador:coord,velocidad:parseFloat(vel),semana:weekNum()};
+  turno={fecha:fields[0].val,turno:fields[1].val,maquina:fields[2].val,nomina:nom,operador:nombre,coordinador:fields[4].val,velocidad:parseFloat(fields[5].val),semana:weekNum()};
   eventos=[];
   setupTurnoUI();
   showScreen("screenTurno");
@@ -332,28 +308,20 @@ function setupTurnoUI(){
   document.getElementById("turnoBadge").textContent=turno.turno+" · "+turno.maquina;
   document.getElementById("turnoBadge").style.display="block";
   document.getElementById("ctxBar").style.display="flex";
-  document.getElementById("ctxBar").innerHTML=
-    `<div class="ctx-item"><b>${turno.operador}</b></div>`+
-    `<div class="ctx-item">Nómina: <b>${turno.nomina}</b></div>`+
-    `<div class="ctx-item">Coord: <b>${turno.coordinador}</b></div>`+
-    `<div class="ctx-item">Vel: <b>${turno.velocidad} m/min</b></div>`;
+  document.getElementById("ctxBar").innerHTML=`<div class="ctx-item"><b>${turno.operador}</b></div><div class="ctx-item">Nómina: <b>${turno.nomina}</b></div><div class="ctx-item">Coord: <b>${turno.coordinador}</b></div><div class="ctx-item">Vel: <b>${turno.velocidad} m/min</b></div>`;
   document.getElementById("kpiBar").style.display="grid";
   updateKPIs(); renderEventos();
 }
 
 function updateKPIs(){
-  const totTM=sumEventos();
-  document.getElementById("kpiTM").textContent=totTM;
+  document.getElementById("kpiTM").textContent=sumEventos();
   document.getElementById("kpiEventos").textContent=eventos.length;
   const mtsR=parseFloat(document.getElementById("cMtsR")?document.getElementById("cMtsR").value:0)||0;
   if(mtsR>0){
     const capTeo=turno.velocidad*MIN_PLANEADOS;
     const mermaM=getMermaMetros();
-    const rend=((mtsR/capTeo)*100).toFixed(0);
-    const cal=mtsR>0?(((mtsR-mermaM)/mtsR)*100).toFixed(0):"—";
-    const ete=((MIN_PLANEADOS/480)*(mtsR/capTeo)*((mtsR-mermaM)/mtsR)*100).toFixed(1);
-    document.getElementById("kpiRend").textContent=rend+"%";
-    document.getElementById("kpiETE").textContent=ete+"%";
+    document.getElementById("kpiRend").textContent=((mtsR/capTeo)*100).toFixed(0)+"%";
+    document.getElementById("kpiETE").textContent=(((MIN_PLANEADOS/480)*(mtsR/capTeo)*((mtsR-mermaM)/mtsR))*100).toFixed(1)+"%";
   } else {
     document.getElementById("kpiRend").textContent="—";
     document.getElementById("kpiETE").textContent="—";
@@ -363,7 +331,7 @@ function updateKPIs(){
 function renderEventos(){
   const el=document.getElementById("eventosList");
   document.getElementById("eventoCount").textContent=eventos.length+" evento"+(eventos.length!==1?"s":"");
-  if(eventos.length===0){
+  if(!eventos.length){
     el.innerHTML=`<div class="empty-state">Sin eventos registrados.<br/>Usa los botones de arriba para registrar tiempos muertos.</div>`;
     document.getElementById("cardResumenCat").style.display="none";
     return;
@@ -378,7 +346,7 @@ function renderEventos(){
       </div>
       <div style="display:flex;align-items:center;gap:6px;">
         <div class="evento-min" id="emin-${i}">${e.minutos} min</div>
-        <button class="evento-edit" data-i="${i}" title="Editar" style="background:none;border:none;cursor:pointer;color:#0D18A8;font-size:15px;padding:0 2px;">✏️</button>
+        <button class="evento-edit" data-i="${i}" style="background:none;border:none;cursor:pointer;font-size:15px;padding:0 2px;">✏️</button>
         <button class="evento-del" data-i="${i}">×</button>
       </div>
     </div>`;
@@ -390,15 +358,13 @@ function renderEventos(){
     btn.addEventListener("click",function(){
       const i=parseInt(this.dataset.i);
       const minDiv=document.getElementById("emin-"+i);
-      const actual=eventos[i].minutos;
-      minDiv.innerHTML=`<input type="number" min="1" value="${actual}" 
-        style="width:60px;padding:4px 6px;font-size:13px;border:1.5px solid #0D18A8;border-radius:6px;text-align:center;"
-        id="einput-${i}"/>
-        <button data-i="${i}" class="btn-confirmar-edit" style="background:#0D18A8;color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer;margin-left:4px;">✓</button>`;
+      minDiv.innerHTML=`<input type="number" min="1" value="${eventos[i].minutos}" id="einput-${i}"
+        style="width:60px;padding:4px 6px;font-size:13px;border:1.5px solid #0D18A8;border-radius:6px;text-align:center;"/>
+        <button data-i="${i}" class="btn-conf" style="background:#0D18A8;color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer;margin-left:4px;">✓</button>`;
       document.getElementById("einput-"+i).focus();
-      document.querySelector(`.btn-confirmar-edit[data-i="${i}"]`).addEventListener("click",function(){
-        const nuevo=parseInt(document.getElementById("einput-"+i).value)||0;
-        if(nuevo>0){ eventos[i].minutos=nuevo; }
+      document.querySelector(`.btn-conf[data-i="${i}"]`).addEventListener("click",function(){
+        const v=parseInt(document.getElementById("einput-"+parseInt(this.dataset.i)).value)||0;
+        if(v>0) eventos[parseInt(this.dataset.i)].minutos=v;
         renderEventos(); updateKPIs();
       });
     });
@@ -409,20 +375,20 @@ function renderEventos(){
 function renderResumenCat(){
   const card=document.getElementById("cardResumenCat");
   const el=document.getElementById("resumenCat");
-  const totales={};
-  eventos.forEach(e=>{totales[e.catId]=(totales[e.catId]||0)+(parseInt(e.minutos)||0);});
-  const cats=Object.keys(totales);
-  if(!cats.length){card.style.display="none";return;}
+  const tot={};
+  eventos.forEach(e=>{tot[e.catId]=(tot[e.catId]||0)+(parseInt(e.minutos)||0);});
+  const keys=Object.keys(tot);
+  if(!keys.length){card.style.display="none";return;}
   card.style.display="block";
-  el.innerHTML=cats.map(cid=>{
+  el.innerHTML=keys.map(cid=>{
     const cat=cid==="correctivo"?{label:"Correctivo",color:"#c00"}:(CATEGORIAS.find(c=>c.id===cid)||{label:cid,color:"#888"});
-    return `<div class="cat-resumen" style="background:${cat.color}"><span style="color:#fff">${cat.label}</span><b style="color:#fff">${totales[cid]} min</b></div>`;
+    return `<div class="cat-resumen" style="background:${cat.color}"><span style="color:#fff">${cat.label}</span><b style="color:#fff">${tot[cid]} min</b></div>`;
   }).join("")+`<div class="cat-resumen" style="background:#333"><span style="color:#fff">TOTAL TM</span><b style="color:#fff">${sumEventos()} min</b></div>`;
 }
 
 // MODAL TM
 document.getElementById("btnAbrirTM").addEventListener("click",()=>{
-  selCat=null;selConcepto=null;
+  selCat=null; selConcepto=null;
   document.getElementById("conceptoSection").style.display="none";
   document.getElementById("minutosSection").style.display="none";
   document.getElementById("tmMinutos").value="";
@@ -433,14 +399,12 @@ document.getElementById("btnCerrarTM").addEventListener("click",()=>document.get
 
 function renderCatGrid(){
   const g=document.getElementById("catGrid");
-  g.innerHTML=CATEGORIAS.map(c=>`
-    <div class="cat-chip" data-id="${c.id}"
-      style="background:${selCat===c.id?c.bg:'#f8f9ff'};border-color:${selCat===c.id?c.color:'#e0e3f8'};color:${selCat===c.id?c.color:'#444'}">
-      ${c.label}</div>`).join("");
+  g.innerHTML=CATEGORIAS.map(c=>`<div class="cat-chip" data-id="${c.id}"
+    style="background:${selCat===c.id?c.bg:"#f8f9ff"};border-color:${selCat===c.id?c.color:"#e0e3f8"};color:${selCat===c.id?c.color:"#444"}">${c.label}</div>`).join("");
   g.querySelectorAll(".cat-chip").forEach(el=>{
     el.addEventListener("click",function(){
-      selCat=this.dataset.id;selConcepto=null;
-      renderCatGrid();renderConceptos();
+      selCat=this.dataset.id; selConcepto=null;
+      renderCatGrid(); renderConceptos();
       document.getElementById("conceptoSection").style.display="block";
       document.getElementById("minutosSection").style.display="none";
     });
@@ -450,10 +414,10 @@ function renderCatGrid(){
 function renderConceptos(){
   const cat=CATEGORIAS.find(c=>c.id===selCat);
   const el=document.getElementById("conceptoList");
-  el.innerHTML=cat.conceptos.map(c=>`<div class="concepto-item ${selConcepto===c?'sel':''}" data-c="${c}">${c}</div>`).join("");
+  el.innerHTML=cat.conceptos.map(c=>`<div class="concepto-item ${selConcepto===c?"sel":""}" data-c="${c}">${c}</div>`).join("");
   el.querySelectorAll(".concepto-item").forEach(el=>{
     el.addEventListener("click",function(){
-      selConcepto=this.dataset.c;renderConceptos();
+      selConcepto=this.dataset.c; renderConceptos();
       document.getElementById("minutosSection").style.display="block";
       document.getElementById("tmMinutos").focus();
     });
@@ -467,7 +431,7 @@ document.getElementById("btnGuardarTM").addEventListener("click",()=>{
   const hora=String(ahora.getHours()).padStart(2,"0")+":"+String(ahora.getMinutes()).padStart(2,"0");
   eventos.push({tipo:"operativo",catId:selCat,concepto:selConcepto,minutos:min,hora});
   document.getElementById("modalTM").style.display="none";
-  renderEventos();updateKPIs();
+  renderEventos(); updateKPIs();
 });
 
 // MODAL CORRECTIVO
@@ -475,39 +439,32 @@ document.getElementById("btnAbrirCorr").addEventListener("click",()=>{
   document.getElementById("corrFalla").value="";
   document.getElementById("corrOT").value="";
   document.getElementById("corrMin").value="";
+  ["fCorrFalla","fCorrOT","fCorrMin"].forEach(id=>clearFieldErr(id));
+  document.getElementById("alertCorr").style.display="none";
   document.getElementById("modalCorr").style.display="flex";
 });
 document.getElementById("btnCerrarCorr").addEventListener("click",()=>document.getElementById("modalCorr").style.display="none");
+
 document.getElementById("btnGuardarCorr").addEventListener("click",()=>{
   const falla=document.getElementById("corrFalla").value.trim();
   const ot=document.getElementById("corrOT").value.trim();
   const min=parseInt(document.getElementById("corrMin").value)||0;
-
-  // Limpiar errores
-  document.getElementById("fCorrOT").classList.remove("field-error");
-  document.getElementById("fCorrMin").classList.remove("field-error");
+  ["fCorrFalla","fCorrOT","fCorrMin"].forEach(id=>clearFieldErr(id));
   document.getElementById("alertCorr").style.display="none";
-
-  let hayError=false;
-  if(!falla){hayError=true;}
-  if(!ot){document.getElementById("fCorrOT").classList.add("field-error");hayError=true;}
-  if(min<=0){document.getElementById("fCorrMin").classList.add("field-error");hayError=true;}
-  if(hayError){
-    document.getElementById("alertCorr").style.display="block";
-    return;
-  }
+  let err=false;
+  if(!falla){setFieldErr("fCorrFalla");err=true;}
+  if(!ot){setFieldErr("fCorrOT");err=true;}
+  if(min<=0){setFieldErr("fCorrMin");err=true;}
+  if(err){document.getElementById("alertCorr").style.display="block";return;}
   const ahora=new Date();
   const hora=String(ahora.getHours()).padStart(2,"0")+":"+String(ahora.getMinutes()).padStart(2,"0");
   eventos.push({tipo:"correctivo",catId:"correctivo",concepto:falla,ot,minutos:min,hora});
   document.getElementById("modalCorr").style.display="none";
-  renderEventos();updateKPIs();
+  renderEventos(); updateKPIs();
 });
 
 // CIERRE
-document.getElementById("btnAbrirCierre").addEventListener("click",()=>{
-  renderResumenFinal();
-  showScreen("screenCierre");
-});
+document.getElementById("btnAbrirCierre").addEventListener("click",()=>{renderResumenFinal();showScreen("screenCierre");});
 document.getElementById("btnVolverTurno").addEventListener("click",()=>showScreen("screenTurno"));
 
 ["cMtsR","cKg","cPesoID","cMtsBob"].forEach(id=>{
@@ -517,13 +474,11 @@ document.getElementById("btnVolverTurno").addEventListener("click",()=>showScree
 
 function calcMerma(){
   const kg=parseFloat(document.getElementById("cKg").value)||0;
-  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
-  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
+  const mb=parseFloat(document.getElementById("cMtsBob").value)||0;
+  const pi=parseFloat(document.getElementById("cPesoID").value)||0;
   const box=document.getElementById("mermaCalcBox");
-  if(kg>0&&mtsBob>0&&pesoID>0){
-    document.getElementById("mermaCalcVal").textContent=((kg*mtsBob)/pesoID).toFixed(1);
-    box.style.display="block";
-  } else { box.style.display="none"; }
+  if(kg>0&&mb>0&&pi>0){document.getElementById("mermaCalcVal").textContent=((kg*mb)/pi).toFixed(1);box.style.display="block";}
+  else box.style.display="none";
 }
 
 function renderKPIFinal(){
@@ -534,14 +489,11 @@ function renderKPIFinal(){
   const cal=mtsR>0?parseFloat((((mtsR-mermaM)/mtsR)*100).toFixed(2)):0;
   const disp=parseFloat(((MIN_PLANEADOS/480)*100).toFixed(2));
   const ete=parseFloat(((disp/100)*(rend/100)*(cal/100)*100).toFixed(2));
-  const pesoID=pesoID_val;
-  const mtsBob=mtsBob_val;
-  const totTM=sumEventos();
   document.getElementById("kpiFinal").innerHTML=[
     ["Cap. Teórica",capTeo.toLocaleString()+" mts"],["Metros Reales",mtsR.toLocaleString()+" mts"],
     ["Rendimiento",rend+"%"],["Calidad",cal+"%"],
     ["Disponibilidad",disp+"%"],["ETE",ete+"%"],
-    ["Total TM",totTM+" min"],["Min. Planeados",MIN_PLANEADOS+" min"],
+    ["Total TM",sumEventos()+" min"],["Min. Planeados",MIN_PLANEADOS+" min"],
   ].map(([l,v])=>`<div style="background:#f4f5fd;border-radius:8px;padding:10px 12px;border:1px solid #c5c9f7;">
     <div style="font-size:11px;color:#888;">${l}</div>
     <div style="font-size:16px;font-weight:700;color:#0D18A8;">${v}</div>
@@ -565,48 +517,33 @@ function renderResumenFinal(){
 
 // GUARDAR
 document.getElementById("btnGuardar").addEventListener("click",async function(){
+  // Limpiar alertas
   document.getElementById("errorTM").style.display="none";
+  document.getElementById("errorProd").style.display="none";
   document.getElementById("errorGuardar").style.display="none";
+  ["fMtsR","fKg","fPesoID","fMtsBob"].forEach(id=>clearFieldErr(id));
 
-  // Validar datos de producción
-  const mtsR=parseFloat(document.getElementById("cMtsR").value)||0;
-  const kg=parseFloat(document.getElementById("cKg").value)||0;
-  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
-  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
-
-  const camposProd=[
-    {id:"cMtsR",val:mtsR,label:"Metros Reales"},
-    {id:"cKg",val:kg,label:"Merma (KG)"},
-    {id:"cPesoID",val:pesoID,label:"Peso ID Bobina"},
-    {id:"cMtsBob",val:mtsBob,label:"Metros por bobina"},
+  // Validar producción
+  const prodFields=[
+    {id:"fMtsR",inputId:"cMtsR",label:"Metros Reales"},
+    {id:"fKg",inputId:"cKg",label:"Merma (KG)"},
+    {id:"fPesoID",inputId:"cPesoID",label:"Peso ID Bobina"},
+    {id:"fMtsBob",inputId:"cMtsBob",label:"Metros por bobina"},
   ];
-
-  // Limpiar errores previos
-  camposProd.forEach(c=>{
-    document.getElementById(c.id).style.borderColor="";
-    document.getElementById(c.id).style.background="";
-  });
-
-  const faltantes=camposProd.filter(c=>c.val<=0);
+  const faltantes=prodFields.filter(f=>!(parseFloat(document.getElementById(f.inputId).value)>0));
   if(faltantes.length>0){
-    faltantes.forEach(c=>{
-      document.getElementById(c.id).style.borderColor="#e00";
-      document.getElementById(c.id).style.background="#fff5f5";
-    });
-    const nombres=faltantes.map(c=>c.label).join(", ");
-    document.getElementById("errorGuardar").style.display="block";
-    document.getElementById("errorGuardar").innerHTML=`⚠️ Completa los siguientes campos antes de guardar: <b>${nombres}</b>`;
-    document.getElementById("errorGuardar").style.background="#fff0f0";
-    document.getElementById("errorGuardar").style.borderColor="#e00";
-    document.getElementById("errorGuardar").style.color="#c00";
+    faltantes.forEach(f=>setFieldErr(f.id));
+    const errProd=document.getElementById("errorProd");
+    errProd.innerHTML="⚠️ Completa los siguientes campos: <b>"+faltantes.map(f=>f.label).join(", ")+"</b>";
+    errProd.style.display="block";
+    errProd.scrollIntoView({behavior:"smooth"});
     return;
   }
 
-  // VALIDACIÓN: TM no puede superar minutos planeados
+  // Validar TM
   const totTM=sumEventos();
   if(totTM>MIN_PLANEADOS){
-    document.getElementById("errorTMDetalle").textContent=
-      `Tiempo muerto registrado: ${totTM} min — Máximo permitido: ${MIN_PLANEADOS} min (excede por ${totTM-MIN_PLANEADOS} min)`;
+    document.getElementById("errorTMDetalle").textContent=`TM registrado: ${totTM} min — Máximo: ${MIN_PLANEADOS} min (excede por ${totTM-MIN_PLANEADOS} min)`;
     document.getElementById("errorTM").style.display="block";
     document.getElementById("errorTM").scrollIntoView({behavior:"smooth"});
     return;
@@ -614,9 +551,10 @@ document.getElementById("btnGuardar").addEventListener("click",async function(){
 
   this.disabled=true; this.textContent="Guardando…";
 
-  const mermaKg=kg;
-  const pesoID_val=pesoID;
-  const mtsBob_val=mtsBob;
+  const mtsR=parseFloat(document.getElementById("cMtsR").value)||0;
+  const mermaKg=parseFloat(document.getElementById("cKg").value)||0;
+  const pesoID=parseFloat(document.getElementById("cPesoID").value)||0;
+  const mtsBob=parseFloat(document.getElementById("cMtsBob").value)||0;
   const mermaM=getMermaMetros();
   const capTeo=turno.velocidad*MIN_PLANEADOS;
   const rend=capTeo>0?parseFloat(((mtsR/capTeo)*100).toFixed(2)):0;
@@ -624,126 +562,120 @@ document.getElementById("btnGuardar").addEventListener("click",async function(){
   const disp=parseFloat(((MIN_PLANEADOS/480)*100).toFixed(2));
   const ete=parseFloat(((disp/100)*(rend/100)*(cal/100)*100).toFixed(2));
 
-  const totPorCat={cambio:0,ajuste:0,limpieza:0,faltantes:0,operativo:0,correctivo:0};
-  eventos.forEach(e=>{if(totPorCat[e.catId]!==undefined)totPorCat[e.catId]+=(parseInt(e.minutos)||0);});
-  const totOp=totPorCat.cambio+totPorCat.ajuste+totPorCat.limpieza+totPorCat.faltantes+totPorCat.operativo;
-  const totCorr=totPorCat.correctivo;
+  const totCat={cambio:0,ajuste:0,limpieza:0,faltantes:0,operativo:0,correctivo:0};
+  eventos.forEach(e=>{if(totCat[e.catId]!==undefined)totCat[e.catId]+=(parseInt(e.minutos)||0);});
+  const totOp=totCat.cambio+totCat.ajuste+totCat.limpieza+totCat.faltantes+totCat.operativo;
+  const totCorr=totCat.correctivo;
   const totDia=totOp+totCorr;
 
-  const minPorConcepto={};
-  eventos.filter(e=>e.tipo==="operativo").forEach(e=>{minPorConcepto[e.concepto]=(minPorConcepto[e.concepto]||0)+(parseInt(e.minutos)||0);});
-  const g=k=>minPorConcepto[k]||0;
+  const minX={};
+  eventos.filter(e=>e.tipo==="operativo").forEach(e=>{minX[e.concepto]=(minX[e.concepto]||0)+(parseInt(e.minutos)||0);});
+  const g=k=>minX[k]||0;
 
-  const fechaParts=turno.fecha.split("/");
-  const fechaISO=`${fechaParts[2]}-${fechaParts[0].padStart(2,"0")}-${fechaParts[1].padStart(2,"0")}`;
+  const fp=turno.fecha.split("/");
+  const fechaISO=`${fp[2]}-${fp[0].padStart(2,"0")}-${fp[1].padStart(2,"0")}`;
   const corrFallas=eventos.filter(e=>e.tipo==="correctivo");
 
   const payload={
-    "Observaciones": document.getElementById("cObs").value||"",
-    "Quien Captruro": "App ETE",
-    "Semana": turno.semana,
-    "Fecha (mes/Dia(año)": fechaISO,
-    "Maquina": turno.maquina,
-    "# Empleado": parseInt(turno.nomina),
-    "Operador ": turno.operador,
-    "Coordinador": turno.coordinador,
-    "Turno": turno.turno,
-    "Velocidad": turno.velocidad,
-    "Minutos Disponibles": 480,
-    "Minutos Planeados": MIN_PLANEADOS,
-    "Cap.Teorica": capTeo,
-    "Diferencia de Producción": capTeo-mtsR,
-    "Producción en Tiempo muerto (Minutos)": turno.velocidad*totDia,
-    "Producción Real": mtsR,
-    "Merma proceso + Devoluciones (metros)": mermaM,
-    "Peso ID. Bobina": pesoID,
-    "Metros ID bobina": mtsBob,
-    "Merma en Mts": mermaM,
-    "Rendimiento Diario": parseFloat(rend)/100,
-    "Cambio de mangas / rodillos porta cliche": g("Cambio de mangas / rodillos porta cliche"),
-    "Cambio de Anillox": g("Cambio de Anillox"),
-    "Lavado de bombas": g("Lavado de bombas"),
-    "Cambio de tinta ": g("Cambio de tinta"),
-    "Vestido de maquina": g("Vestido de maquina"),
-    "Cambio de navajas y sellos en rasqueta": g("Cambio de navajas y sellos en rasqueta"),
-    "Poner ficha o desarrollo de rodillos": g("Poner ficha o desarrollo de rodillos"),
-    "Calibracion de unidades": g("Calibracion de unidades"),
-    "Ajuste de presión": g("Ajuste de presión"),
-    "Ajuste de Registro": g("Ajuste de Registro"),
-    "Tonos": g("Tonos"),
-    "Cambio de modelo": g("Cambio de modelo"),
-    "Pruebas de desprendimiento (funda)": g("Pruebas de desprendimiento (funda)"),
-    "Liberación 1era. Pieza": g("Liberación 1era. Pieza"),
-    "Total TM Cambio Modelo": totPorCat.cambio,
-    "Unidades descalibradas": g("Unidades descalibradas"),
-    "Ajuste o falla en rasqueta": g("Ajuste o falla en rasqueta"),
-    "Catalización": g("Catalización"),
-    "Checar Viscosidad": g("Checar Viscosidad"),
-    "Ajuste de Mamparas": g("Ajuste de Mamparas"),
-    "Falla o cambio Anilox": g("Falla o cambio Anilox"),
-    "Ajuste o Cambio Grabados": g("Ajuste o Cambio Grabados"),
-    "Ajuste o Cambio del reverso": g("Ajuste o Cambio del reverso"),
-    "Ajuste de cierre en grabado": g("Ajuste de cierre en grabado"),
-    "Sticky back": g("Sticky back"),
-    "Calzar placa": g("Calzar placa"),
-    "Ajuste de Montaje": g("Ajuste de Montaje"),
-    "Ajustar presiones por falla de maquina": g("Ajustar presiones por falla de maquina"),
-    "Fallas en material parches, Olanes, Grumos, Arrugas": g("Fallas en material parches, Olanes, Grumos, Arrugas"),
-    "Esperar Grabado": g("Esperar Grabado"),
-    "Total TM Ajustes": totPorCat.ajuste,
-    "Rasquetas": g("Rasquetas"),
-    "Anilox, mangas": g("Anilox, mangas"),
-    "Cliches": g("Cliches"),
-    "Destapar anilox": g("Destapar anilox"),
-    "Destapar Mangueras": g("Destapar Mangueras"),
-    "Tambor": g("Tambor"),
-    "Limpieza de bombas": g("Limpieza de bombas"),
-    "Limpieza placas": g("Limpieza placas"),
-    "Grabados": g("Grabados"),
-    "Total TM Limpieza": totPorCat.limpieza,
-    "Falta material nuevo": g("Falta material nuevo"),
-    "Material de ajuste": g("Material de ajuste"),
-    "Preparar material": g("Preparar material"),
-    "Falta de Tintas": g("Falta de Tintas"),
-    "Falta de Grabados ": g("Falta de Grabados"),
-    "Falta de Programa": g("Falta de Programa"),
-    "Total TM Faltantes": totPorCat.faltantes,
-    "Junta Extraordinaria": g("Junta Extraordinaria"),
-    "Falta de personal": g("Falta de personal"),
-    "Entrega de turno": g("Entrega de turno"),
-    "llenado de Reportes y tirar merma": g("llenado de Reportes y tirar merma"),
-    "Sacar estándares": g("Sacar estándares"),
-    "Cambio de bobina": g("Cambio de bobina"),
-    "Espera de Grabados": g("Espera de Grabados"),
-    "Espera de montaje": g("Espera de montaje"),
-    "Limpieza área": g("Limpieza área"),
-    "Total TM fallas OP": totPorCat.operativo,
-    "Total TM Operativo": totOp,
-    "Falla": corrFallas.map(e=>e.concepto).join("; "),
-    "Orden de trabajo": corrFallas.map(e=>e.ot||"").join("; "),
-    "Minutos": corrFallas.map(e=>e.minutos).join("; "),
-    "Total TM Impresión": totDia,
-    "Tiempo disponible": 480,
-    "Tiempo Real prod.": MIN_PLANEADOS,
-    "% Disponibilidad": parseFloat(disp)/100,
-    "Prod. Planeada": capTeo,
-    "Prod. Real": mtsR,
-    "% Rendimiento": parseFloat(rend)/100,
-    "Metros fabricados": mtsR,
-    "Metros liberados": mtsR-mermaM,
-    "% Caldiad": parseFloat(cal)/100,
-    "ETE": parseFloat(ete)/100,
-    "Minutos Faltantes por reportar": MIN_PLANEADOS-totOp
+    "Observaciones":document.getElementById("cObs").value||"",
+    "Quien Captruro":"App ETE",
+    "Semana":turno.semana,
+    "Fecha (mes/Dia(año)":fechaISO,
+    "Maquina":turno.maquina,
+    "# Empleado":parseInt(turno.nomina),
+    "Operador ":turno.operador,
+    "Coordinador":turno.coordinador,
+    "Turno":turno.turno,
+    "Velocidad":turno.velocidad,
+    "Minutos Disponibles":480,
+    "Minutos Planeados":MIN_PLANEADOS,
+    "Cap.Teorica":capTeo,
+    "Diferencia de Producción":capTeo-mtsR,
+    "Producción en Tiempo muerto (Minutos)":turno.velocidad*totDia,
+    "Producción Real":mtsR,
+    "Merma proceso + Devoluciones (metros)":mermaM,
+    "Peso ID. Bobina":pesoID,
+    "Metros ID bobina":mtsBob,
+    "Merma en Mts":mermaM,
+    "Rendimiento Diario":rend/100,
+    "Cambio de mangas / rodillos porta cliche":g("Cambio de mangas / rodillos porta cliche"),
+    "Cambio de Anillox":g("Cambio de Anillox"),
+    "Lavado de bombas":g("Lavado de bombas"),
+    "Cambio de tinta ":g("Cambio de tinta"),
+    "Vestido de maquina":g("Vestido de maquina"),
+    "Cambio de navajas y sellos en rasqueta":g("Cambio de navajas y sellos en rasqueta"),
+    "Poner ficha o desarrollo de rodillos":g("Poner ficha o desarrollo de rodillos"),
+    "Calibracion de unidades":g("Calibracion de unidades"),
+    "Ajuste de presión":g("Ajuste de presión"),
+    "Ajuste de Registro":g("Ajuste de Registro"),
+    "Tonos":g("Tonos"),
+    "Cambio de modelo":g("Cambio de modelo"),
+    "Pruebas de desprendimiento (funda)":g("Pruebas de desprendimiento (funda)"),
+    "Liberación 1era. Pieza":g("Liberación 1era. Pieza"),
+    "Total TM Cambio Modelo":totCat.cambio,
+    "Unidades descalibradas":g("Unidades descalibradas"),
+    "Ajuste o falla en rasqueta":g("Ajuste o falla en rasqueta"),
+    "Catalización":g("Catalización"),
+    "Checar Viscosidad":g("Checar Viscosidad"),
+    "Ajuste de Mamparas":g("Ajuste de Mamparas"),
+    "Falla o cambio Anilox":g("Falla o cambio Anilox"),
+    "Ajuste o Cambio Grabados":g("Ajuste o Cambio Grabados"),
+    "Ajuste o Cambio del reverso":g("Ajuste o Cambio del reverso"),
+    "Ajuste de cierre en grabado":g("Ajuste de cierre en grabado"),
+    "Sticky back":g("Sticky back"),
+    "Calzar placa":g("Calzar placa"),
+    "Ajuste de Montaje":g("Ajuste de Montaje"),
+    "Ajustar presiones por falla de maquina":g("Ajustar presiones por falla de maquina"),
+    "Fallas en material parches, Olanes, Grumos, Arrugas":g("Fallas en material parches, Olanes, Grumos, Arrugas"),
+    "Esperar Grabado":g("Esperar Grabado"),
+    "Total TM Ajustes":totCat.ajuste,
+    "Rasquetas":g("Rasquetas"),
+    "Anilox, mangas":g("Anilox, mangas"),
+    "Cliches":g("Cliches"),
+    "Destapar anilox":g("Destapar anilox"),
+    "Destapar Mangueras":g("Destapar Mangueras"),
+    "Tambor":g("Tambor"),
+    "Limpieza de bombas":g("Limpieza de bombas"),
+    "Limpieza placas":g("Limpieza placas"),
+    "Grabados":g("Grabados"),
+    "Total TM Limpieza":totCat.limpieza,
+    "Falta material nuevo":g("Falta material nuevo"),
+    "Material de ajuste":g("Material de ajuste"),
+    "Preparar material":g("Preparar material"),
+    "Falta de Tintas":g("Falta de Tintas"),
+    "Falta de Grabados ":g("Falta de Grabados"),
+    "Falta de Programa":g("Falta de Programa"),
+    "Total TM Faltantes":totCat.faltantes,
+    "Junta Extraordinaria":g("Junta Extraordinaria"),
+    "Falta de personal":g("Falta de personal"),
+    "Entrega de turno":g("Entrega de turno"),
+    "llenado de Reportes y tirar merma":g("llenado de Reportes y tirar merma"),
+    "Sacar estándares":g("Sacar estándares"),
+    "Cambio de bobina":g("Cambio de bobina"),
+    "Espera de Grabados":g("Espera de Grabados"),
+    "Espera de montaje":g("Espera de montaje"),
+    "Limpieza área":g("Limpieza área"),
+    "Total TM fallas OP":totCat.operativo,
+    "Total TM Operativo":totOp,
+    "Falla":corrFallas.map(e=>e.concepto).join("; "),
+    "Orden de trabajo":corrFallas.map(e=>e.ot||"").join("; "),
+    "Minutos":corrFallas.map(e=>e.minutos).join("; "),
+    "Total TM Impresión":totDia,
+    "Tiempo disponible":480,
+    "Tiempo Real prod.":MIN_PLANEADOS,
+    "% Disponibilidad":disp/100,
+    "Prod. Planeada":capTeo,
+    "Prod. Real":mtsR,
+    "% Rendimiento":rend/100,
+    "Metros fabricados":mtsR,
+    "Metros liberados":mtsR-mermaM,
+    "% Caldiad":cal/100,
+    "ETE":ete/100,
+    "Minutos Faltantes por reportar":MIN_PLANEADOS-totOp
   };
 
   try {
-    await fetch(PA_URL,{
-      method:"POST",
-      mode:"no-cors",
-      headers:{"Content-Type":"text/plain"},
-      body:JSON.stringify(payload)
-    });
-    // con no-cors no podemos leer la respuesta, asumimos éxito
+    await fetch(PA_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(payload)});
     document.getElementById("successDetail").innerHTML=`
       <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Máquina:</span> <b style="color:#0D18A8">${turno.maquina}</b></p>
       <p style="margin-bottom:6px;font-size:13px;"><span style="color:#888">Operador:</span> <b style="color:#0D18A8">${turno.operador}</b></p>
@@ -763,9 +695,7 @@ document.getElementById("btnNuevoTurno").addEventListener("click",()=>{
   document.getElementById("turnoBadge").style.display="none";
   document.getElementById("ctxBar").style.display="none";
   document.getElementById("kpiBar").style.display="none";
-  ["hNomina","hVel","hTurno","hMaquina","hCoord"].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.value="";
-  });
+  ["hNomina","hVel","hTurno","hMaquina","hCoord"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
   document.getElementById("hNombreChip").innerHTML="";
   document.getElementById("hFecha").value=today();
   showScreen("screenInicio");
