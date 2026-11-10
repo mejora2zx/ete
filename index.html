@@ -164,7 +164,7 @@ textarea{resize:vertical;height:64px;}
       <div class="card-title">📦 Datos de producción</div>
       <div class="grid2">
         <div class="field" id="fMtsR"><label>Metros Reales</label><input id="cMtsR" type="number" placeholder="0"/><span class="err-msg">Requerido</span></div>
-        <div class="field" id="fKg"><label>Merma (KG)</label><input id="cKg" type="number" placeholder="0"/><span class="err-msg">Requerido</span></div>
+        <div class="field" id="fKg"><label>Merma (KG)</label><input id="cKg" type="number" min="0" step="any" placeholder="0"/><span class="err-msg">Requerido</span></div>
         <div class="field" id="fPesoID"><label>Peso ID Bobina</label><input id="cPesoID" type="number" placeholder="0"/><span class="err-msg">Requerido</span></div>
         <div class="field" id="fMtsBob"><label>Metros por bobina</label><input id="cMtsBob" type="number" placeholder="0"/><span class="err-msg">Requerido</span></div>
       </div>
@@ -224,6 +224,15 @@ textarea{resize:vertical;height:64px;}
   </div>
 </div>
 
+<!-- MODAL AVISO -->
+<div class="modal-overlay" id="modalAviso" style="display:none;align-items:center;padding:16px;z-index:300;">
+  <div class="modal" style="border-radius:16px;max-width:420px;padding:20px;">
+    <div class="modal-title" style="color:#c00;justify-content:flex-start;gap:8px;">⚠️ <span id="avisoTitulo"></span></div>
+    <p id="avisoMsg" style="font-size:14px;color:#333;line-height:1.5;margin-bottom:16px;"></p>
+    <button class="btn-primary" id="btnCerrarAviso">Entendido</button>
+  </div>
+</div>
+
 <!-- MODAL CORRECTIVO -->
 <div class="modal-overlay" id="modalCorr" style="display:none">
   <div class="modal">
@@ -269,10 +278,16 @@ function getMermaMetros(){
   const kg=parseFloat(document.getElementById("cKg").value)||0;
   const mb=parseFloat(document.getElementById("cMtsBob").value)||0;
   const pi=parseFloat(document.getElementById("cPesoID").value)||0;
-  return (kg>0&&mb>0&&pi>0)?(kg*mb)/pi:0;
+  return (mb>0&&pi>0)?(kg*mb)/pi:0;
 }
 function clearFieldErr(id){document.getElementById(id).classList.remove("field-err");}
 function setFieldErr(id){document.getElementById(id).classList.add("field-err");}
+function mostrarAviso(titulo,msgHtml){
+  document.getElementById("avisoTitulo").textContent=titulo;
+  document.getElementById("avisoMsg").innerHTML=msgHtml;
+  document.getElementById("modalAviso").style.display="flex";
+}
+document.getElementById("btnCerrarAviso").addEventListener("click",()=>{document.getElementById("modalAviso").style.display="none";});
 
 // INICIO
 document.getElementById("hFecha").value=today();
@@ -477,7 +492,8 @@ function calcMerma(){
   const mb=parseFloat(document.getElementById("cMtsBob").value)||0;
   const pi=parseFloat(document.getElementById("cPesoID").value)||0;
   const box=document.getElementById("mermaCalcBox");
-  if(kg>0&&mb>0&&pi>0){document.getElementById("mermaCalcVal").textContent=((kg*mb)/pi).toFixed(1);box.style.display="block";}
+  const kgRaw=document.getElementById("cKg").value.trim();
+  if(kgRaw!==""&&mb>0&&pi>0){document.getElementById("mermaCalcVal").textContent=((kg*mb)/pi).toFixed(1);box.style.display="block";}
   else box.style.display="none";
 }
 
@@ -530,13 +546,33 @@ document.getElementById("btnGuardar").addEventListener("click",async function(){
     {id:"fPesoID",inputId:"cPesoID",label:"Peso ID Bobina"},
     {id:"fMtsBob",inputId:"cMtsBob",label:"Metros por bobina"},
   ];
-  const faltantes=prodFields.filter(f=>!(parseFloat(document.getElementById(f.inputId).value)>0));
+  const faltantes=prodFields.filter(f=>{
+    const v=document.getElementById(f.inputId).value.trim();
+    // Merma (KG) acepta 0 y negativos; solo se exige que no esté vacía
+    if(f.inputId==="cKg") return v===""||isNaN(parseFloat(v));
+    return !(parseFloat(v)>0);
+  });
   if(faltantes.length>0){
     faltantes.forEach(f=>setFieldErr(f.id));
     const errProd=document.getElementById("errorProd");
     errProd.innerHTML="⚠️ Completa los siguientes campos: <b>"+faltantes.map(f=>f.label).join(", ")+"</b>";
     errProd.style.display="block";
     errProd.scrollIntoView({behavior:"smooth"});
+    return;
+  }
+
+  // Validar merma (KG): sin negativos; 0 solo si se cumplió la capacidad teórica
+  const kgVal=parseFloat(document.getElementById("cKg").value);
+  const mtsRVal=parseFloat(document.getElementById("cMtsR").value)||0;
+  const metaMts=turno.velocidad*MIN_PLANEADOS;
+  if(kgVal<0){
+    setFieldErr("fKg");
+    mostrarAviso("Merma no válida","No se permiten valores negativos en la merma. Captura 0 o un valor positivo.");
+    return;
+  }
+  if(kgVal===0&&mtsRVal<metaMts){
+    setFieldErr("fKg");
+    mostrarAviso("Merma en 0 kg no permitida","No puede haber 0 kg de merma porque no se cumplió la meta de metros.<br><br>Meta (capacidad teórica): <b>"+metaMts.toLocaleString()+" m</b><br>Metros reales: <b>"+mtsRVal.toLocaleString()+" m</b><br><br>Revisa los datos o captura la merma real del turno.");
     return;
   }
 
