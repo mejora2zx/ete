@@ -222,7 +222,7 @@ function agg(rows){
     const prod=num(r["Prod. Real"])||num(r["Producción Real"]);
     const fab=num(r["Metros fabricados"])||prod;
     a.prod+=prod; a.fab+=fab;
-    a.cap+=num(r["Prod. Planeada"])||num(r["Cap.Teorica"]);
+    a.cap+=num(r["Prod. Planeada"])||num(r["Cap.Teorica"])||(num(r["Velocidad"])*(num(r["Minutos Planeados"])||MIN_PLAN));
     a.lib+=("Metros liberados" in r)?num(r["Metros liberados"]):(fab-num(r["Merma en Mts"]));
     let op=0;
     CATS.forEach(c=>{let s=0;c.keys.forEach(k=>{s+=num(r[k]);});a.cats[c.id]+=s;op+=s;});
